@@ -12,7 +12,7 @@
 <!-- Header/Cabeçalho -->
 <?php
     include("classes/header.php");
-    $Header::setHeader('HomePageOn');
+    $Header::setHeader('HomePageOff');
 ?>
 <!-- Carousel -->
 <?//php include_once('classes/carrousel.php'); ?>
@@ -55,7 +55,7 @@
               <a href="#!" class="text-white">Contatos</a>
             </li>
             <li>
-              <a href="#!" class="text-white">Seja Parceiro</a>
+              <a href="cadastroFornecedor.php" class="text-white">Seja Parceiro</a>
             </li>
             <li>
               <a href="#!" class="text-white">Ajuda</a>
