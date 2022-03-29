@@ -4,11 +4,9 @@
     <title>Login</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/centralizaPágina.css">
-<<<<<<< HEAD
     <?php include("classes/Controllerimgs.php")?>
-=======
     <?php include("classes/header.php")?>
->>>>>>> b27f6f80887553cd4df77aa498b32de92b8c2dfd
+
 
   </head>
   <body class="text-center bg-secondary">
@@ -16,11 +14,8 @@
 <main class="form-signin bg-dark bg-gradient bg-opacity-75 rounded-3 FormAnimation">
   <form>
 
-<<<<<<< HEAD
     <img class="img-fluid" src="<?php echo $LogoComTitulo->getImg(); ?>" alt="" width="120" height="100">
-=======
     <img class="img-fluid" src="<?php echo $Header->getImg(); ?>" alt="" width="120" height="100">
->>>>>>> b27f6f80887553cd4df77aa498b32de92b8c2dfd
     <h1 class="h3 mb-3 fw-normal text-white">Login <br>Fornecedor</h1>
 
 
