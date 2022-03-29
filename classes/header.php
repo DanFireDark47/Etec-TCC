@@ -7,6 +7,10 @@
 include('Controllerimgs.php');
 
 class Header{
+<<<<<<< HEAD
+=======
+
+>>>>>>> b27f6f80887553cd4df77aa498b32de92b8c2dfd
     public $img;
 
     public function setImg($img){
