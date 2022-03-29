@@ -12,10 +12,8 @@
 <!-- Header/Cabeçalho -->
 <?php
     include("classes/header.php");
-<<<<<<< HEAD
     include("classes/cards.php");
-=======
->>>>>>> b27f6f80887553cd4df77aa498b32de92b8c2dfd
+    
     $Header->setHeader('HomePageOff');
 ?>
 <!-- Carousel -->
