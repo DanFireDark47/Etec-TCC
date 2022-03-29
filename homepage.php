@@ -12,7 +12,7 @@
 <!-- Header/Cabeçalho -->
 <?php
     include("classes/header.php");
-    $Header::setHeader('HomePageOff');
+    $Header->setHeader('HomePageOff');
 ?>
 <!-- Carousel -->
 <?//php include_once('classes/carrousel.php'); ?>
