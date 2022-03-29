@@ -4,9 +4,22 @@
 
 <?php
 
+include('Controllerimgs.php');
+
 class Header{
-    static function setHeader($typo){
+    public $img;
+
+    public function setImg($img){
+        $this->img = $img;
+    }
+
+    public function getImg(){
+        return $this->img;
+    }
+
+    function setHeader($typo){
         if($typo == "QuemSomosNósOff"){//Quem Somos Nós para Usuarios Deslogados
+            
             echo '
 <header>
 <nav class="px-1 py-1 navbar-dark bg-dark text-white">
@@ -14,7 +27,7 @@ class Header{
 <!-- Logo -->
 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
     <a href="homepage.php" class="d-flex align-items-center me-lg-auto text-white text-decoration-none">
-        <img class="img-fluid d-flex rounded-circle" style="width:5rem; height:5rem;" src="https://cdn.pixabay.com/photo/2020/05/10/13/10/comb-5153963_960_720.png" alt="icone pente">
+        <img class="img-fluid d-flex rounded-circle" style="width:5rem; height:5rem;" src="'.self::getImg().'" alt="Logo Imagen">
         <span class="navbar-text navbar-brand">FroggyBox</span>
     </a>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -24,10 +37,10 @@ class Header{
 <div class="collapse navbar-collapse" id="navbar">
     <ul class="navbar-nav me-auto mb-2 mb-md-0">
     <li class="nav-item">
-        <a class="nav-link" href="cadastro.php">Fazer Cadastro</a>
+        <a class="nav-link" href="cadastroUsuario.php">Fazer Cadastro</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="login.php">Fazer Login</a>
+        <a class="nav-link" href="loginUsuario.php">Fazer Login</a>
     </li>
     <li class="nav-item">
     <a class="nav-link disabled" href="quemSomosNós.php">Quem somos nós</a>
@@ -50,7 +63,7 @@ class Header{
 <!-- Logo -->
 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
     <a href="homepage.php" class="d-flex align-items-center me-lg-auto text-white text-decoration-none">
-        <img class="img-fluid d-flex rounded-circle" style="width:5rem; height:5rem;" src="https://cdn.pixabay.com/photo/2020/05/10/13/10/comb-5153963_960_720.png" alt="icone pente">
+    <img class="img-fluid d-flex rounded-circle" style="width:5rem; height:5rem;" src="'.self::getImg().'" alt="Logo Imagen">
         <span class="navbar-text navbar-brand">FroggyBox</span>
     </a>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -89,7 +102,7 @@ class Header{
 <!-- Logo -->
 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
     <a href="homepage.php" class="d-flex align-items-center me-lg-auto text-white text-decoration-none">
-        <img class="img-fluid d-flex rounded-circle" style="width:5rem; height:5rem;" src="https://cdn.pixabay.com/photo/2020/05/10/13/10/comb-5153963_960_720.png" alt="icone pente">
+    <img class="img-fluid d-flex rounded-circle" style="width:5rem; height:5rem;" src="'.self::getImg().'" alt="Logo Imagen">
         <span class="navbar-text navbar-brand">FroggyBox</span>
     </a>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -99,10 +112,10 @@ class Header{
 <div class="collapse navbar-collapse" id="navbar">
     <ul class="navbar-nav me-auto mb-2 mb-md-0">
     <li class="nav-item">
-        <a class="nav-link" href="cadastro.php">Fazer Cadastro</a>
+        <a class="nav-link" href="cadastroUsuario.php">Fazer Cadastro</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="login.php">Fazer Login</a>
+        <a class="nav-link" href="loginUsuario.php">Fazer Login</a>
     </li>
     <li class="nav-item">
     <a class="nav-link" href="quemSomosNós.php">Quem somos nós</a>
@@ -126,7 +139,7 @@ class Header{
 <!-- Logo -->
 <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
     <a href="homepage.php" class="d-flex align-items-center me-lg-auto text-white text-decoration-none">
-        <img class="img-fluid d-flex rounded-circle" style="width:5rem; height:5rem;" src="https://cdn.pixabay.com/photo/2020/05/10/13/10/comb-5153963_960_720.png" alt="icone pente">
+        <img class="img-fluid d-flex rounded-circle" style="width:5rem; height:5rem;" src="'.self::getImg().'" alt="Logo Imagen">
         <span class="navbar-text navbar-brand">FroggyBox</span>
     </a>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -163,5 +176,7 @@ class Header{
 
 }
 $Header = new Header;
+$Header->setImg($LogoSemTitulo->getImg());
+
 ?>
                 

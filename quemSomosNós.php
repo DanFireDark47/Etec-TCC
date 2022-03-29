@@ -11,7 +11,8 @@
   
     <?php  
     include("classes/header.php");
-    $Header::setHeader('QuemSomosNósOn');
+    
+    $Header->setHeader('QuemSomosNósOff');
     ?>
 
 <div class="container bg-dark rounded-2 mt-4 px-4 py-5" id="custom-cards">
@@ -81,7 +82,8 @@
         </div>
       </div>
     </div>
-  </div>
-    
+</div>
+
+    <?php include('classes/footer.php');?>
 </body>
 </html>
