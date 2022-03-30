@@ -29,8 +29,8 @@
     $card6->ConstructCard();
     $card7->ConstructCard();*/
     
-    $agenda1->constructAgenda('fornecedor');
-    $agenda2->constructAgenda('fornecedor'); 
+    $agenda1->constructAgenda();
+    $agenda2->constructAgenda();
 ?>
 
 
