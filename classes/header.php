@@ -7,10 +7,6 @@
 include('Controllerimgs.php');
 
 class Header{
-<<<<<<< HEAD
-=======
-
->>>>>>> b27f6f80887553cd4df77aa498b32de92b8c2dfd
     public $img;
 
     public function setImg($img){
@@ -80,7 +76,7 @@ class Header{
                     <a class="nav-link" href="perfil.php">Nome</a>
     </li>
     <li class="nav-item">
-                    <a class="nav-link" href="#">Procurar Barbearias Próximas</a>
+                    <a class="nav-link" href="agendaUsuario.php">Agenda</a>
     </li>
     <li class="nav-item">
                     <a class="nav-link disabled" href="quemSomosNós.php">Quem somos nós</a>
@@ -156,7 +152,7 @@ class Header{
         <a class="nav-link" href="perfil.php">Nome</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Procurar Barbearias Próximas</a>
+    <a class="nav-link" href="agendaUsuario.php">Agenda</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="quemSomosNós.php">Quem somos nós</a>
@@ -171,14 +167,48 @@ class Header{
 </nav>
 </div>
 </div>
-</nav>';}
-
+</nav>';}elseif($typo == "HomePageFornecedor"){
+    echo '
+    <header>
+    <nav class="px-1 py-1 navbar-dark bg-dark text-white">
+    <div class="container-fluid">
+    <!-- Logo -->
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="homepage.php" class="d-flex align-items-center me-lg-auto text-white text-decoration-none">
+        <img class="img-fluid d-flex rounded-circle" style="width:5rem; height:5rem;" src="'.self::getImg().'" alt="Logo Imagen">
+            <span class="navbar-text navbar-brand">FroggyBox</span>
+        </a>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+            <a class="nav-link" href="configuraçõesFornecedor.php">Nome Da Loja</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="agendaFornecedor">Agenda</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="Carteira.php">Carteira</a>
+        </li>
+        </ul>
+        <form class="d-flex">
+        <input class="form-control me-2" type="text" placeholder="Procurar">
+        <button class="btn btn-outline-success" type="submit">Procurar</button>
+        </form>
+        </div>
+        </div>
+    </nav>
+    </div>
+    </div>
+    </nav>
+    </header>';
 
 
 }
-
-
-}
+}}
 $Header = new Header;
 $Header->setImg($LogoSemTitulo->getImg());
 

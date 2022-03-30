@@ -13,21 +13,24 @@
 <?php
     include("classes/header.php");
     include("classes/cards.php");
-    
-    $Header->setHeader('HomePageOff');
+    include("classes/agenda.php");
+    $Header->setHeader('HomePageFornecedor');
 ?>
 <!-- Carousel -->
 <?php //include_once('classes/carrousel.php'); ?>
 
 <!--Card-->
 <?php 
-      $card1->ConstructCard();
-      $card2->ConstructCard();
-      $card3->ConstructCard();
-      $card4->ConstructCard();
-      $card5->ConstructCard();
-      $card6->ConstructCard();
-      $card7->ConstructCard();
+    /*$card1->ConstructCard();
+    $card2->ConstructCard();
+    $card3->ConstructCard();
+    $card4->ConstructCard();
+    $card5->ConstructCard();
+    $card6->ConstructCard();
+    $card7->ConstructCard();*/
+    
+    $agenda1->constructAgenda('fornecedor');
+    $agenda2->constructAgenda('fornecedor'); 
 ?>
 
 

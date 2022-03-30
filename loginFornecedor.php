@@ -5,8 +5,6 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/centralizaPágina.css">
     <?php include("classes/Controllerimgs.php")?>
-    <?php include("classes/header.php")?>
-
 
   </head>
   <body class="text-center bg-secondary">
@@ -15,7 +13,6 @@
   <form>
 
     <img class="img-fluid" src="<?php echo $LogoComTitulo->getImg(); ?>" alt="" width="120" height="100">
-    <img class="img-fluid" src="<?php echo $Header->getImg(); ?>" alt="" width="120" height="100">
     <h1 class="h3 mb-3 fw-normal text-white">Login <br>Fornecedor</h1>
 
 

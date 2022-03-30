@@ -12,7 +12,7 @@
     <?php  
     include("classes/header.php");
     
-    $Header->setHeader('QuemSomosNósOff');
+    $Header->setHeader('QuemSomosNósOn');
     ?>
 
 <div class="container bg-dark rounded-2 mt-4 px-4 py-5" id="custom-cards">
