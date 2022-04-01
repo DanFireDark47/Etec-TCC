@@ -167,7 +167,7 @@ class Header{
 </nav>
 </div>
 </div>
-</nav>';}elseif($typo == "HomePageFornecedor"){
+</nav>';}elseif($typo == "AgendaFornecedor"){ //Exibido caso Fornecedor estiver Logado na Agenda
     echo '
     <header>
     <nav class="px-1 py-1 navbar-dark bg-dark text-white">
@@ -188,7 +188,7 @@ class Header{
             <a class="nav-link" href="configuraçõesFornecedor.php">Nome Da Loja</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="agendaFornecedor">Agenda</a>
+            <a class="nav-link disabled" href="homepage.php">Agenda</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="Carteira.php">Carteira</a>

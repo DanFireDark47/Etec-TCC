@@ -14,7 +14,7 @@
     include("classes/header.php");
     include("classes/cards.php");
     include("classes/agenda.php");
-    $Header->setHeader('HomePageFornecedor');
+    $Header->setHeader('AgendaFornecedor');
 ?>
 <!-- Carousel -->
 <?php //include_once('classes/carrousel.php'); ?>
