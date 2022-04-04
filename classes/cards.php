@@ -115,7 +115,7 @@ class Card{
 
     public function ConstructCard(){
         echo '<div class="d-inline-block m-4">
-        <form action="PaginaConstructor.php">
+        <form action="PageConstructorFornecedor.php">
         <div class="card border border-5 border-dark d-md-inline-block m-4 bg-dark text-white" style="width: 18rem;">
           <img src="'.Self::getFoto().'" class="card-img-top" alt="Foto da Barbearia">
           <div class="card-body">
