@@ -14,7 +14,9 @@
 <?php
     include("classes/header.php");
     include("classes/agenda.php");
-    $Header->setHeader('AgendaFornecedor');
+    $tipoDeConta = "Fornecedor";
+    $login = true;
+    $Header->HeaderConstruct($login,$tipoDeConta);
 ?>
 <!-- Carousel -->
 <?php include_once('classes/carrousel.php'); ?>

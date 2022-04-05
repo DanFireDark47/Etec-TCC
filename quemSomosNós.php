@@ -11,8 +11,9 @@
   
     <?php  
     include("classes/header.php");
-    
-    $Header->setHeader('QuemSomosNósOn');
+    $login = true;
+    $tipoDeConta = "Usuario";
+    $Header->HeaderConstruct($login,$tipoDeConta);
     ?>
 
 <div class="container bg-dark rounded-2 mt-4 px-4 py-5" id="custom-cards">

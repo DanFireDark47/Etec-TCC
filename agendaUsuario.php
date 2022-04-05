@@ -8,14 +8,27 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body class="bg-secondary">
-    <?php include('classes/header.php');
-        $Header->SetHeader('HomePageOn');
 
-        include('classes/agenda.php');
 
-        $agenda1U->constructAgenda();
-        $agenda2U->constructAgenda();
-        $agenda3U->constructAgenda();
+    <?php 
+    include('classes/header.php');
+    $tipoDeConta = "Usuario"; 
+    $login = true;
+        $logado = $Header->HeaderConstruct($login,$tipoDeConta);
+        if($logado == true && $tipoDeConta == "Usuario"){
+            include('classes/agenda.php');
+            $agenda1->constructAgenda();
+            $agenda2->constructAgenda();
+            $agenda3->constructAgenda();
+        }elseif($logado == true && $tipoDeConta == "Fornecedor"){
+            header("Location:homepage.php");
+        }elseif($logado == false){
+            echo '<div class="alert alert-danger">
+            Você Não está logado!
+            </div>';
+        }
+
+        
     ?>
 
 </body>

@@ -9,18 +9,18 @@
   <body class="text-center bg-secondary">
     
 <main class="form-signin bg-dark bg-gradient bg-opacity-75 rounded-3 FormAnimation">
-  <form>
+  <form action="classes/crud.php" method="GET">
 
     <img class="img-fluid" src="<?php echo $LogoComTitulo->getImg(); ?>" alt="" width="120" height="100">
     <h1 class="h3 mb-3 fw-normal text-white">Login</h1>
 
 
     <div class="form-floating">
-      <input type="email" class="form-control text-dark" id="floatingInput" placeholder="name@example.com">
+      <input type="email" class="form-control text-dark" name="emailUsuario" id="floatingInput" placeholder="name@example.com">
       <label for="floatingInput">Email</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input type="password" class="form-control" name="senhaUsuario" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Senha</label>
     </div>
 

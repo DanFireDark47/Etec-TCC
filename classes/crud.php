@@ -44,16 +44,15 @@ Class Crud{
     public function desconectar($conexao){
         mysqli_close($conexao);
     }
-}
-
-Class ADM extends Crud{
     public function SetBancoDeDados(){
         $this->setLocalDB('localhost');
         $this->setSenhaDB('');
         $this->setUsuarioDB('root');
         $this->setNomeDB('barbearia');
     }
+}
 
+Class ADM extends Crud{
     public function ADMPageContruct()
     {
     $conexão = $this->conectar();
@@ -137,4 +136,35 @@ Class ADM extends Crud{
 }
 
 $ADM = new ADM();
+$Crud = new Crud();
+
+
+
+//página de logiun do usuário.
+
+class Loginusuario extends crud{
+
+    public function verificaUsuario(){
+
+    }
+
+}
+    $Crud->SetBancoDeDados();
+    $emailUsuario=$_GET['emailUsuario'];
+    $senhaUsuario=$_GET['senhaUsuario'];
+
+    $connect= $Crud->conectar();
+    if (isset($emailUsuario, $senhaUsuario)){
+        $query ="SELECT email, senha from cliente WHERE email = '$emailUsuario' and senha = '$senhaUsuario'";
+        $dados = mysqli_query($connect, $query);
+        if  (mysqli_num_rows($dados)> 0){
+            setcookie("login", $login);
+            header("Location:../homepage.php");
+     
+} else{
+    echo "<script language='javascript' type='text/javascript'>
+    alert('Login e/ou senha incorretos');window.location.href='login.html';
+    </script>";
+}
+    }
 ?>
