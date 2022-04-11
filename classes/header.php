@@ -398,6 +398,19 @@ class Header{
                     return false;
                 }
                 break;
+            case "cadastrarPedido.php":
+                if($login == true){
+                    if($tipoDeConta == "Usuario"){
+                        echo $this->HomepageOn();
+                        return true;
+                    }elseif($tipoDeConta == "Fornecedor"){
+                        echo $this->HomePageFornecedor();
+                    }
+                }else{
+                    echo $this->HomePageOff();
+                    return false;
+                }
+                break;
         }   
     }
 }

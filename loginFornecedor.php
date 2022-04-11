@@ -35,8 +35,5 @@
   </form>
 </main>
 
-
-    
-  
-
-</body></html>
+</body>
+</html>

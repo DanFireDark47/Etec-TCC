@@ -72,7 +72,7 @@ Class AgendaFornecedor extends Agenda{
             </div>
             <div class="row row-cols-1">
                 <div class="col">
-                    <a href="classes/crud.php" class="mx-1 mt-2 btn btn-outline-success">Enviar Pedido de Agendamento</a>
+                    <a href="cadastrarPedido.php" class="mx-1 mt-2 btn btn-outline-success">Enviar Pedido de Agendamento</a>
                 </div>
             </div>
         </div>
