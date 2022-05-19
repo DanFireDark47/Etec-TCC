@@ -4,7 +4,7 @@
 
 <?php
 
-include('Controller.php');
+include('../controller/imgs.php');
 
 class Header{
     public $img;
@@ -349,7 +349,7 @@ class Header{
                 <a class="nav-link " href="../view/PageConstructorFornecedor.php">Visualizar Loja</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link disabled" href="../view/CarteiraFornecedor.php">Carteira</a>
+            <a class="nav-link disabled" href="../view/CarteiraFornecedor.php">Cadastrar Produto</a>
             </li>
             </ul>
             <form method="POST" action="../modals/crud.php">

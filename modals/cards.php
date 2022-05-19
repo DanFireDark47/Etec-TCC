@@ -110,30 +110,49 @@ class Card{
         }
 
 }
-
-
-
     public function ConstructCard(){
-        echo '<div class="d-inline-block m-4">
-        <form action="PageConstructorFornecedor.php">
-        <div class="card border border-5 border-dark d-md-inline-block m-4 bg-dark text-white" style="width: 18rem;">
-          <img src="'.Self::getFoto().'" class="card-img-top" alt="Foto da Barbearia">
-          <div class="card-body">
-            <h5 class="card-title">'.Self::getNome().'</h5>
-            <p class="card-text">'.Self::getDescricao().'<br><p>'.Self::getStars().'</p></p>
-            <p class="card-text"><b>Local</b><br>'.Self::getLocal().'</p>
-            <p class="card-text"><b>Especialização</b><br>'.Self::getEspecializacao().'</p>
-            <div class="row justify-content-md-center">
-            <button class="btn btn-outline-success col-lg-auto mb-auto m-xs-auto">Entrar na loja</button>
-            <label class="rounded-1 text-white bg-success border border-2 border-success mt-1 m-sm-2 m-lg-2 col-lg-auto">R$ '.Self::getPreco().'</label>
-          </div>
-          </div>
-        </div>
-        
-        </div>';
+        if(isset($_SESSION['logado'])){
+            if($_SESSION['logado'] == true){
+                echo '<div class="d-inline-block m-4">
+                <form action="PageConstructorFornecedor.php">
+                <div class="card border border-5 border-dark d-md-inline-block m-4 bg-dark text-white" style="width: 18rem;">
+                <img src="'.Self::getFoto().'" class="card-img-top" alt="Foto da Barbearia">
+                <div class="card-body">
+                    <h5 class="card-title">'.Self::getNome().'</h5>
+                    <p class="card-text">'.Self::getDescricao().'<br><p>'.Self::getStars().'</p></p>
+                    <p class="card-text"><b>Local</b><br>'.Self::getLocal().'</p>
+                    <p class="card-text"><b>Especialização</b><br>'.Self::getEspecializacao().'</p>
+                    <div class="row justify-content-md-center">
+                    <button class="btn btn-outline-success col-lg-auto mb-auto m-xs-auto">Entrar na loja</button>
+                    <label class="rounded-1 text-white bg-success border border-2 border-success mt-1 m-sm-2 m-lg-2 col-lg-auto">R$ '.Self::getPreco().'</label>
+                </div>
+                </div>
+                </div>
+                
+                </div>';
+            }
+        }else{
+            echo '<div class="d-inline-block m-4">
+            <form action="loginUsuario.php">
+            <div class="card border border-5 border-dark d-md-inline-block m-4 bg-dark text-white" style="width: 18rem;">
+              <img src="'.Self::getFoto().'" class="card-img-top" alt="Foto da Barbearia">
+              <div class="card-body">
+                <h5 class="card-title">'.Self::getNome().'</h5>
+                <p class="card-text">'.Self::getDescricao().'<br><p>'.Self::getStars().'</p></p>
+                <p class="card-text"><b>Local</b><br>'.Self::getLocal().'</p>
+                <p class="card-text"><b>Especialização</b><br>'.Self::getEspecializacao().'</p>
+                <div class="row justify-content-md-center">
+                <button class="btn btn-outline-success col-lg-auto mb-auto m-xs-auto">Entrar na loja</button>
+                <label class="rounded-1 text-white bg-success border border-2 border-success mt-1 m-sm-2 m-lg-2 col-lg-auto">R$ '.Self::getPreco().'</label>
+              </div>
+              </div>
+            </div>
+            
+            </div>';
+            }
+            
     }
-
-
+        
 }
 
 $card1 = new Card;
@@ -192,6 +211,4 @@ $card7->setDescricao('Venha cortar os cabelos com a gente.');
 $card7->setPreco('10,00');
 $card7->setAvaliacao(0.0);
 $card7->setFoto('https://media.istockphoto.com/vectors/barbershop-logo-vector-id1151068384');
-
-
 ?>

@@ -4,14 +4,14 @@
     <title>Cadastro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/centralizaPágina.css">
-    <?php include('../modals/Controller.php');?>
+    <?php include("../controller/loginAuth.php");
+          include("../controller/imgs.php");
+          $loginAuth->BloqueiaPagina();
+    ?>
 
   </head>
   <?php ?>
   <body class="text-center bg-secondary">
-  <?php 
-  $LogoComTitulo->BloqueiaPagina();
-  ?>
     <main class="form-signin bg-dark rounded-3 text-white bg-gradient bg-opacity-75 rounded-3 FormAnimation">
   <form method="POST" action="../modals/crud.php">
     <img class="mb-3 img-fluid" src="<?php echo $LogoComTitulo->getImg() ?>" alt="" width="120" height="100">

@@ -12,7 +12,8 @@
     include("../modals/header.php");
     $Header->Construct();
 ?>
-    <div class=" text-center bg-secondary text-white border rounded-2 p-3 m-2 bg-opacity-25 rounded-2">
+    <!-- Cadastrar Produto -->
+    <div class="text-center d-md-inline-block bg-secondary text-white border p-3 m-1 bg-opacity-25 rounded-2">
     <form method="POST" action="../modals/crud.php">
                 <label class="h3">Cadastrar Produto</label><br>
                 <label class="h5 form-label">Tipo de Produto</label>
@@ -39,37 +40,37 @@
             <input type="submit" class="btn mt-1 btn-outline-primary"/>
         </form>
     </div>
-
-    <center class="bg-info align-center bg-opacity-50 m-2 border border-4 rounded-2">
-        <div class=" text-center">
-            <table class="table">
+    <!-- Produtos Cadastrados -->
+    <div class="text-center d-md-inline-block bg-secondary text-white border p-3 m-1 bg-opacity-25 rounded-2">
+        <label class="h3">Produtos Cadastrados</label><br>
+        <table class="border rounded-2 bg-secondary bg-opacity-25 d-md-inline-block align-center bg-opacity-50 p-2">
+            
                 <tr>
                     <td scope="col">Nome</td>
                     <td scope="col">Preço</td>
                     <td scope="col">Quantidade</td>
+                    <td scope="col"></td>
                 </tr>
                 <tr>
                     <td>Corte De Cabelo</td>
                     <td>R$ 50,00</td>
                     <td>10</td>
+                    <td><a href="#" class="btn btn-primary">Editar</a></td>
                 </tr>
                 <tr>
                     <td>Corte De Barba</td>
                     <td>R$ 50,00</td>
                     <td>10</td>
+                    <td><a href="#" class="btn btn-primary">Editar</a></td>
                 </tr>
-            </table>
-        </div>
-</center>
+                <tr>
+                    <td>Corte De Barba</td>
+                    <td>R$ 50,00</td>
+                    <td>10</td>
+                    <td><a href="#" class="btn btn-primary">Editar</a></td>
+                </tr>
+        </table>
 
-    <div class="p-2 rounded-2 bg-secondary bg-opacity-25 text-white m-2">
-        <ul class="list-group">
-            <li class="list-group-item bg-secondary bg-opacity-25 text-white">Serviço menos vendido: Tratamento Capilar</li>
-            <li class="list-group-item bg-secondary bg-opacity-25 text-white">Serviço mais vendido: Corte de Cabelo</li>
-        </ul>
-    
-        
-        
-    </div>
+
 </body>
 </html>

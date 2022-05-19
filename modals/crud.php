@@ -172,6 +172,44 @@ if(isset($_POST['exe']) && $_POST['exe'] == 'loginUsuario'){
         header('Location: ../view/loginFornecedor.php');  // Redirecionando para Login
     }
 
+} else if($_POST['exe'] == 'loginADM'){
+
+    $loginADM = $_POST['loginADM'];
+    $senhaADM = $_POST['senha'];
+    $Crud->SetBancoDeDados();
+    $conexão = $Crud->conectar();
+    $query = $conexão->prepare("SELECT * FROM administrador WHERE login =:loginADM AND senha =:senhaADM");
+    $query->bindParam(":loginADM",$loginADM,PDO::PARAM_STR);
+    $query->bindParam(":senhaADM",$senhaADM,PDO::PARAM_STR);
+    $query->execute();
+    $row = $query->fetch(PDO::FETCH_ASSOC);
+
+    if($row['login'] == $loginADM && $row['senha'] == $senhaADM){
+                
+        session_start();
+        $_SESSION['logado'] = true;
+        $_SESSION['tipoConta'] = 'Administrador';
+        $_SESSION['id'] = $row['id'];
+        $_SESSION['login'] = $row['login'];
+        
+        header('Location: ../view/adminPage.php');  // Redirecionando para Home
+    }else{
+        session_start();
+        $_SESSION['tentativaADM'] = true;
+        header('Location: ../view/loginAdmin.php');  // Redirecionando para Login
+    }
+
 }
+
+
+
+/* Agenda de pendências:
+
+Atualizar database
+pagina de adm
+agenda
+pagina de fornecedor
+criação de cards automatica.
+*/ 
 
 ?>
