@@ -27,10 +27,10 @@
     </h5>
     */?>
     <a class="btn btn-dark my-1" href="../view/home.php">Home</a><br>
-    <form method="POST" action="../modals/crud.php">
+    <form method="POST" action="../modals/crudEXE.php">
         <button class="btn btn-dark my-2" name="exe" value="deslogar" href="../modals/crud.php">Deslogar</a><br>
     </form>
-    <form method="POST" action="../modals/crud.php">
+    <form method="POST" action="../modals/crudExe.php">
     <button class="btn btn-outline-danger my-3" name="exe" value="fechar conta" type="submit">Fechar conta</button>
     </form>
 </div>

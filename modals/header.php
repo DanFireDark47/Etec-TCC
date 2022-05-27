@@ -232,14 +232,14 @@ class Header{
                 <a class="nav-link" href="../view/perfilFornecedor.php">'.$_SESSION['nomeSalao'].'</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../view/PageConstructorFornecedor.php">Visualizar Loja</a>
+                <a class="nav-link" name="id" value="'.$_SESSION['documento'].'" href="../view/paginaFornecedor.php">Visualizar Loja</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="../view/cadastrarProduto.php">Cadastrar Produto</a>
             </li>
             </ul>
-            <form method="POST" action="../modals/crud.php">
-            <button class="btn btn-dark my-2" name="exe" value="deslogar" href="../modals/crud.php">Deslogar</a><br>
+            <form method="POST" action="../modals/crudExe.php">
+            <button class="btn btn-dark my-2" name="exe" value="deslogar" href="../modals/crudExe.php">Deslogar</a><br>
             </form>
             </div>
             </div>
@@ -270,14 +270,14 @@ class Header{
                 <a class="nav-link disabled" href="../view/perfilFornecedor.php" >'.$_SESSION['nomeSalao'].'</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="../view/PageConstructorFornecedor.php">Visualizar Loja</a>
+                <a class="nav-link" name="id" value="'.$_SESSION['documento'].'" href="../view/paginaFornecedor.php">Visualizar Loja</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="../view/cadastrarProduto.php">Cadastrar Produto</a>
             </li>
             </ul>
-            <form method="POST" action="../modals/crud.php">
-            <button class="btn btn-dark my-2" name="exe" value="deslogar" href="../modals/crud.php">Deslogar</a><br>
+            <form method="POST" action="../modals/crudExe.php">
+            <button class="btn btn-dark my-2" name="exe" value="deslogar" href="../modals/crudExe.php">Deslogar</a><br>
             </form>
             </div>
             </div>
@@ -287,7 +287,7 @@ class Header{
         </nav>
         </header>';
     }
-    public function PageConstructorFornecedor(){
+    public function paginaFornecedor(){
         return '
         <header>
         <nav class="px-1 py-1 navbar-dark bg-dark text-white">
@@ -308,14 +308,14 @@ class Header{
                 <a class="nav-link " href="../view/perfilFornecedor.php" >'.$_SESSION['nomeSalao'].'</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="../view/PageConstructorFornecedor.php">Visualizar Loja</a>
+                <a class="nav-link" name="id" value="'.$_SESSION['documento'].'" href="../view/paginaFornecedor.php">Visualizar Loja</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" href="../view/cadastrarProduto.php">Cadastrar Produto</a>
             </li>
             </ul>
-            <form method="POST" action="../modals/crud.php">
-            <button class="btn btn-dark my-2" name="exe" value="deslogar" href="../modals/crud.php">Deslogar</a><br>
+            <form method="POST" action="../modals/crudExe.php">
+            <button class="btn btn-dark my-2" name="exe" value="deslogar" href="../modals/crudExe.php">Deslogar</a><br>
             </form>
             </div>
             </div>
@@ -346,14 +346,14 @@ class Header{
                 <a class="nav-link " href="../view/perfilFornecedor.php" >'.$_SESSION['nomeSalao'].'</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " href="../view/PageConstructorFornecedor.php">Visualizar Loja</a>
+                <a class="nav-link" name="id" value="'.$_SESSION['documento'].'" href="../view/paginaFornecedor.php">Visualizar Loja</a>
             </li>
             <li class="nav-item">
             <a class="nav-link disabled" href="../view/CarteiraFornecedor.php">Cadastrar Produto</a>
             </li>
             </ul>
-            <form method="POST" action="../modals/crud.php">
-                <button class="btn btn-dark my-2" name="exe" value="deslogar" href="../modals/crud.php">Deslogar</a><br>
+            <form method="POST" action="../modals/crudExe.php">
+                <button class="btn btn-dark my-2" name="exe" value="deslogar" href="../modals/crudExe.php">Deslogar</a><br>
             </form>
             </div>
             </div>
@@ -407,13 +407,13 @@ class Header{
             case "cadastrarProduto.php":
                 echo $this->CarteiraFornecedor();
                     break;
-            case "PageConstructorFornecedor.php":
+            case "paginaFornecedor.php":
                 if($login == true){
                     if($tipoDeConta == "Usuario"){
                         echo $this->HomepageOn();
                         return true;
                     }elseif($tipoDeConta == "Fornecedor"){
-                        echo $this->PageConstructorFornecedor();
+                        echo $this->paginaFornecedor();
                     }
                 }else{
                     echo $this->HomePageOff();

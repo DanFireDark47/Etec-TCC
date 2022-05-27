@@ -6,21 +6,21 @@
     <link rel="stylesheet" href="../style/centralizaPágina.css">
     <?php include("../controller/loginAuth.php");
           include("../controller/imgs.php");
-    $loginAuth->BloqueiaPagina();
+    $loginAuth->BloqueioParaPessoasLogadas();
     ?>
   </head>
   <body class="text-center bg-secondary">
     
 <main class="form-signin bg-dark bg-gradient bg-opacity-75 rounded-3 FormAnimation">
-  <form action="../modals/crud.php" method="POST">
+<form method="POST" action="../modals/crudExe.php">
 
     <img class="img-fluid" src="<?php echo $LogoComTitulo->getImg(); ?>" alt="" width="120" height="100">
     <h1 class="h3 mb-3 fw-normal text-white">Login</h1>
 
     <?php 
-    if(isset($_SESSION['tentativaUsuario'])){
+    if(isset($_SESSION['ErroClienteLogin'])){
       
-      if($_SESSION['tentativaUsuario'] == true){
+      if($_SESSION['ErroClienteLogin'] == true){
       echo '
       <div class="alert alert-danger">
       Usuario ou senha incorreto
@@ -32,15 +32,15 @@
 
 
     <div class="form-floating">
-      <input type="email" class="form-control text-dark" name="emailUsuario" placeholder="name@example.com" required>
+      <input type="email" class="form-control text-dark" name="email" placeholder="name@example.com" required>
       <label>Email</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" name="senhaUsuario" placeholder="Password" required>
+      <input type="password" class="form-control" name="senha" placeholder="Password" required>
       <label>Senha</label>
     </div>
 
-    <button class="w-100 btn mb-4 btn-lg btn-outline-success" name="exe" value="loginUsuario" type="submit">Entrar</button>
+    <button class="w-100 btn mb-4 btn-lg btn-outline-success" name="exe" value="loginCliente" type="submit">Entrar</button>
     <a href="home.php" class="mt-5 mb-3 text-muted">Voltar</a>
   </form>
 </main>

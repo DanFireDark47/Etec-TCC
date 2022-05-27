@@ -7,13 +7,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Perfil Geral</title>
 </head>
-<body class="bg-dark">
+<body class="bg-secondary">
 <?php
     include("../modals/header.php");
+    include("../modals/agenda.php");
+    include("../controller/loginAuth.php");
+    include("../modals/cards.php");
     $Header->Construct();
+    $loginAuth->BloqueioParaUsuariosDeslogados();
+    if(!isset($_SESSION['logado'])){
+        header("Location: ../view/home.php");
+    }else if($_SESSION['logado'] == true && $_SESSION['tipoConta'] == "Usuario"){
+        header("Location: ../view/home.php");
+    }
+
+
 ?>
     <!-- Cadastrar Produto -->
-    <div class="text-center d-md-inline-block bg-secondary text-white border p-3 m-1 bg-opacity-25 rounded-2">
+    <div class="text-center bg-dark text-white border p-3 m-1 rounded-2">
     <form method="POST" action="../modals/crud.php">
                 <label class="h3">Cadastrar Produto</label><br>
                 <label class="h5 form-label">Tipo de Produto</label>
@@ -41,9 +52,9 @@
         </form>
     </div>
     <!-- Produtos Cadastrados -->
-    <div class="text-center d-md-inline-block bg-secondary text-white border p-3 m-1 bg-opacity-25 rounded-2">
+    <div class="text-center bg-dark text-white border p-3 mx-auto mt rounded-2">
         <label class="h3">Produtos Cadastrados</label><br>
-        <table class="border rounded-2 bg-secondary bg-opacity-25 d-md-inline-block align-center bg-opacity-50 p-2">
+        <table class="border rounded-2 bg-dark bg-opacity-25 d-md-inline-block align-center bg-opacity-50 p-2">
             
                 <tr>
                     <td scope="col">Nome</td>
@@ -70,6 +81,13 @@
                     <td><a href="#" class="btn btn-primary">Editar</a></td>
                 </tr>
         </table>
+</div>
+<!--Card Edição-->
+<?php
+
+    $documento = $_SESSION['documento'];
+    $card->cardEdicao($documento);
+?>
 
 
 </body>

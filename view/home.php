@@ -24,13 +24,7 @@
 <?php 
     if(isset($_SESSION['logado'])){
         if($_SESSION['logado'] == true && $_SESSION['tipoConta'] == "Usuario"){
-    $card1->ConstructCard();
-    $card2->ConstructCard();
-    $card3->ConstructCard();
-    $card4->ConstructCard();
-    $card5->ConstructCard();
-    $card6->ConstructCard();
-    $card7->ConstructCard();
+            $card->constructCardsPage();
         }
     }
     if(isset($_SESSION['logado'])){
@@ -40,13 +34,7 @@
         $agenda3->constructAgenda();
         }
     }else{
-        $card1->ConstructCard();
-        $card2->ConstructCard();
-        $card3->ConstructCard();
-        $card4->ConstructCard();
-        $card5->ConstructCard();
-        $card6->ConstructCard();
-        $card7->ConstructCard();
+        $card->constructCardsPage();
     }
 
 

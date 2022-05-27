@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="../style/centralizaPágina.css">
     <?php include("../controller/loginAuth.php");
           include("../controller/imgs.php");
-          $loginAuth->BloqueiaPagina();
+          session_start();
+          $loginAuth->BloqueioParaPessoasLogadas();
     ?>
 
   </head>
-  <?php ?>
   <body class="text-center bg-secondary">
     <main class="form-signin bg-dark rounded-3 text-white bg-gradient bg-opacity-75 rounded-3 FormAnimation">
-  <form method="POST" action="../modals/crud.php">
+  <form method="POST" action="../modals/crudExe.php">
     <img class="mb-3 img-fluid" src="<?php echo $LogoComTitulo->getImg() ?>" alt="" width="120" height="100">
     <h1 class="h3 mb-1 fw-normal text-white">Cadastro<br>Fornecedores</h1>
     <a class="small link-dark" href="loginFornecedor.php">Já possuo uma conta</a>
@@ -27,9 +27,6 @@
 
       <label class="form-label my-1">Nome Salão</label>
       <input type="text" name="nomeSalao" class="form-control" required>
-
-      <label class="form-label my-1">Website</label>
-      <input type="text" name="website" class="form-control">
 
       <br><b>Contato</b><br>
 
@@ -52,6 +49,9 @@
 
       <label class="form-label my-1">Numero</label>
       <input type="number" name="numero" class="form-control" required>
+      
+      <label class="form-label my-1">Cidade</label>
+      <input type="number" name="cidade" class="form-control" required>
 
       <label class="form-label my-1">Estado</label>
       <input type="text" name="estado" class="form-control" required>
@@ -70,7 +70,7 @@
     </div>
 
 
-    <button class="my-3 w-100 btn mb-4 btn-lg btn-outline-success" placeholder="Cadastrar" name="exe" value="cadastrarFornecedor" type="submit">Cadastrar</button>
+    <button class="my-3 w-100 btn mb-4 btn-lg btn-outline-success" placeholder="Cadastrar" name="exe" value="cadastrarSalao" type="submit">Cadastrar</button>
     <a href="../view/home.php" class="mt-5 mb-3 text-muted">Voltar</a>
   </form>
 </main>

@@ -11,48 +11,56 @@
 <?php
     include("../modals/header.php");
     include("../modals/agenda.php");
+    include("../controller/loginAuth.php");
+    include("../modals/crud.php");
     $Header->Construct();
+    $loginAuth->BloqueioParaUsuariosDeslogados();
     if(!isset($_SESSION['logado'])){
         header("Location: ../view/home.php");
     }else if($_SESSION['logado'] == true && $_SESSION['tipoConta'] == "Usuario"){
         header("Location: ../view/home.php");
     }
 
+    $Crud = new Crud();
+    $Crud->SetBancoDeDados();
+    $conexão = $Crud->conectar();
+    $query = $conexão->prepare("SELECT * FROM salao WHERE documento =:documento");
+    $query->bindParam(":documento",$_SESSION['documento'],PDO::PARAM_INT);
+    $query->execute();
+    $row = $query->fetch(PDO::FETCH_ASSOC);
+
 
 ?>
-<!-- Carousel -->
-<?php include_once('../modals/carrousel.php'); ?>
 
-<main>
-    <div class="text-center bg-dark text-white p-3 m-2 rounded-3">
-        <form method="POST" action="../modals/crud.php">
-        <h1>Nome da Loja: <input class="form-control" type="text"></input></h1>
-        <h2>Endereço: <input class="form-control"></h2>
-        <input type="submit" class="btn btn-outline-primary" value="Enviar">
+<main class="text-center form-signin bg-dark p-md-3 m-md-2 text-white rounded-3">
+    
+        <form method="POST" action="../modals/crudExe.php">
+        <div class="row justify-content-between">
+            <input type="hidden" name="documento" value="<?php echo $row['documento']?>">
+            <div class="col-lg">
+                <input type="text" name="bairro" placeholder="Bairro" class="form-control mb-3" value="<?php echo $row['bairro'];?>" required>
+            </div> 
+            <div class="col">
+                <input type="text" name="cidade" placeholder="Cidade" class="form-control mb-3" value="<?php echo $row['cidade'];?>" required>
+            </div> 
+            <div class="col">
+                <input type="text" name="estado" placeholder="Estado" class="form-control mb-3" value="<?php echo $row['estado'];?>" required>
+            </div> 
+            <div class="col-lg">
+                <input type="text" name="cep" placeholder="CEP" class="form-control mb-3" value="<?php echo $row['cep'];?>" required>
+            </div> 
+            <div class="col">
+                <input type="text" name="endereco" placeholder="Endereco" class="form-control mb-3" value="<?php echo $row['endereco'];?>" required>
+            </div> 
+            <div class="col">
+                <input type="text" name="numero" placeholder="Numero" class="form-control mb-3" value="<?php echo $row['numero'];?>" required>     
+            </div>
+            <div class="col-lg">
+                <input type="text" name="complemento" placeholder="Complemento" value="<?php echo $row['complemento'];?>" class="form-control mb-3">
+            </div>
+        </div>
+            <input type="submit" class="btn btn-outline-primary" name="exe" value="Atualizar Informações"/></a>
         </form>
-        <form>
-        <table class="table table-dark table-striped">
-            <thead>
-                <tr>
-                <th scope="col">Tipo de produto</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Preço</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>Corte de Cabelo</td>
-                <td>Moicano</td>
-                <td>R$15.00</td>
-                </tr>
-                <tr>
-                <td>Corte de Barba</td>
-                <td>Bigode</td>
-                <td>R$10.00</td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
     <form method="POST" action="classes/crud.php">
         <h3>Disponibilizar Horário</h3>
         <div class="form-group">

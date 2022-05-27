@@ -6,21 +6,22 @@
     <link rel="stylesheet" href="../style/centralizaPágina.css">
     <?php include("../controller/loginAuth.php");
           include("../controller/imgs.php");
-    $loginAuth->BloqueiaPagina();
+    $loginAuth->BloqueioParaPessoasLogadas();
     ?>
 
   </head>
   <body class="text-center bg-secondary">
     
 <main class="form-signin bg-dark bg-gradient bg-opacity-75 rounded-3 FormAnimation">
-  <form method="POST" action="../modals/crud.php">
+<form method="POST" action="../modals/crudExe.php">
 
     <img class="img-fluid" src="<?php echo $LogoComTitulo->getImg(); ?>" alt="" width="120" height="100">
     <h1 class="h3 mb-3 fw-normal text-white">Login <br>Fornecedor</h1>
     <?php
-    if(isset($_SESSION['tentativaFornecedor'])){
+    session_start();
+    if(isset($_SESSION['ErroLoginFornecedor'])){
       
-      if($_SESSION['tentativaFornecedor'] == true){
+      if($_SESSION['ErroLoginFornecedor'] == true){
       echo '
       <div class="alert alert-danger">
       Usuario ou senha incorreto
@@ -35,9 +36,9 @@
     </div>
     <div class="form-floating">
       <input type="password" class="form-control" name="senha" placeholder="Password" required>
-      <label for="floatingPassword">Senha</label>
+      <label >Senha</label>
     </div>
-    <button class="w-100 btn mb-4 btn-lg btn-outline-success" name="exe" value="loginFornecedor" type="submit">Entrar</button>
+    <button class="w-100 btn mb-4 btn-lg btn-outline-success" name="exe" value="loginSalao" type="submit">Entrar</button>
     <a href="../view/home.php" class="mt-5 mb-3 text-muted">Voltar</a>
   </form>
 </main>
