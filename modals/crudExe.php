@@ -94,9 +94,12 @@ if(isset($_POST['exe']) && $_POST['exe'] == 'loginCliente'){
     $query->bindParam(":senha",$senha,PDO::PARAM_STR);
     $query->execute();
 
-    $queryCard = $conexão->prepare("INSERT INTO card (salao_doc) VALUES (:documento)");
+    $queryCard = $conexão->prepare("INSERT INTO card (documentoSalao_card, nome) VALUES (:documento, :nome)");
     $queryCard->bindParam(":documento",$documento,PDO::PARAM_STR);
+    $queryCard->bindParam(":nome",$nome,PDO::PARAM_STR);
     $queryCard->execute();
+
+
     
 
     header('Location: ../view/loginFornecedor.php');  // Redirecionando para Login do fornecedor
@@ -157,6 +160,7 @@ if(isset($_POST['exe']) && $_POST['exe'] == 'loginCliente'){
     }
 
 }else if($_POST['exe'] == 'Atualizar Informações'){//atualiza Localidade do Salão
+    session_start();
     $bairro = $_POST['bairro'];
     $cidade = $_POST['cidade'];
     $estado = $_POST['estado'];
@@ -164,7 +168,7 @@ if(isset($_POST['exe']) && $_POST['exe'] == 'loginCliente'){
     $numero = $_POST['numero'];
     $cep = $_POST['cep'];
     $endereco = $_POST['endereco'];
-    $documento = $_POST['documento'];
+    $documento = $_SESSION['documento'];
 
     $Crud->SetBancoDeDados();
     $conexão = $Crud->conectar();
@@ -189,12 +193,90 @@ if(isset($_POST['exe']) && $_POST['exe'] == 'loginCliente'){
 
     $Crud->SetBancoDeDados();
     $conexão = $Crud->conectar();
-    $query = $conexão->prepare("UPDATE card SET foto =:foto, nome =:nome, descricao =:descricao, especializacao =:especializacao WHERE salao_doc =:documento");
+    $query = $conexão->prepare("UPDATE card SET foto =:foto, nome =:nome, descricao =:descricao, especializacao =:especializacao WHERE documentoSalao_card =:documento");
     $query->bindParam(":foto",$foto,PDO::PARAM_STR);
     $query->bindParam(":nome",$nome,PDO::PARAM_STR);
     $query->bindParam(":descricao",$descricao,PDO::PARAM_STR);
     $query->bindParam(":especializacao",$especializacao,PDO::PARAM_STR);
     $query->bindParam(":documento",$documento,PDO::PARAM_STR);
+    $query->execute();
+    header('Location: ../view/cadastrarProduto.php');
+}else if($_POST['exe'] == 'Cadastrar Data e Horario'){
+    session_start();
+    $data = $_POST['data'];
+    $hora = $_POST['hora'];
+    $documento = $_SESSION['documento'];
+
+    $Crud->SetBancoDeDados();
+    $conexão = $Crud->conectar();
+    $query = $conexão->prepare("INSERT INTO agenda (data, horario, documentoSalao_agenda) VALUES (:data, :hora, :documento)");
+    $query->bindParam(":data",$data,PDO::PARAM_STR);
+    $query->bindParam(":hora",$hora,PDO::PARAM_STR);
+    $query->bindParam(":documento",$documento,PDO::PARAM_STR);
+    $query->execute();
+    header('Location: ../view/perfilFornecedor.php');
+
+}else if($_POST['exe'] == 'Deletar Horario'){
+    $id = $_POST['id'];
+    $Crud->SetBancoDeDados();
+    $conexão = $Crud->conectar();
+    $query = $conexão->prepare("DELETE FROM agenda WHERE id =:id");
+    $query->bindParam(":id",$id,PDO::PARAM_INT);
+    $query->execute();
+    header('Location: ../view/perfilFornecedor.php');
+
+}else if($_POST['exe'] == 'Marcar'){
+    session_start();
+    $idAgenda = $_POST['idAgenda'];
+    $idServico = $_POST['idServico'];
+    $documento = $_SESSION['documento'];
+
+    $Crud->SetBancoDeDados();
+    $conexão = $Crud->conectar();
+    $query = $conexão->prepare("UPDATE agenda SET `documentoCliente_agenda` = :documento, `idServico_agenda` = :idServico WHERE (`id` = :idAgenda);");
+    $query->bindParam(":idServico",$idServico,PDO::PARAM_INT);
+    $query->bindParam(":documento",$documento,PDO::PARAM_STR);
+    $query->bindParam(":idAgenda",$idAgenda,PDO::PARAM_INT);
+    $query->execute();
+    header('Location: ../view/home.php');
+
+}else if($_POST['exe'] == 'Cadastrar Produto'){
+    session_start();
+    $nome = $_POST['nomeServico'];
+    $descricao = $_POST['descricaoServico'];
+    $preco = $_POST['precoServico'];
+    $documento = $_SESSION['documento'];
+
+    $Crud->SetBancoDeDados();
+    $conexão = $Crud->conectar();
+    $query = $conexão->prepare("INSERT INTO servico (nome, descrição, preco, documentoSalao_servico) VALUES (:nome, :descricao, :preco, :documento)");
+    $query->bindParam(":nome",$nome,PDO::PARAM_STR);
+    $query->bindParam(":descricao",$descricao,PDO::PARAM_STR);
+    $query->bindParam(":preco",$preco,PDO::PARAM_STR);
+    $query->bindParam(":documento",$documento,PDO::PARAM_STR);
+    $query->execute();
+    header('Location: ../view/cadastrarProduto.php');
+}else if($_POST['exe'] == 'Deletar Serviço'){
+    $id = $_POST['id'];
+    $Crud->SetBancoDeDados();
+    $conexão = $Crud->conectar();
+    $query = $conexão->prepare("DELETE FROM servico WHERE id =:id");
+    $query->bindParam(":id",$id,PDO::PARAM_INT);
+    $query->execute();
+    header('Location: ../view/cadastrarProduto.php');
+}else if($_POST['exe'] == 'Editar Serviço'){
+    $id = $_POST['id'];
+    $nome = $_POST['nomeServico'];
+    $descricao = $_POST['descricaoServico'];
+    $preco = $_POST['precoServico'];
+
+    $Crud->SetBancoDeDados();
+    $conexão = $Crud->conectar();
+    $query = $conexão->prepare("UPDATE servico SET nome =:nome, descrição =:descricao, preco =:preco WHERE id =:id");
+    $query->bindParam(":nome",$nome,PDO::PARAM_STR);
+    $query->bindParam(":descricao",$descricao,PDO::PARAM_STR);
+    $query->bindParam(":preco",$preco,PDO::PARAM_STR);
+    $query->bindParam(":id",$id,PDO::PARAM_INT);
     $query->execute();
     header('Location: ../view/cadastrarProduto.php');
 }

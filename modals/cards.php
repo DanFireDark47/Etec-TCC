@@ -1,6 +1,6 @@
 <?php
 
-include("../modals/crud.php");
+include_once("../modals/crud.php");
 
 class Card{
     public $nome;
@@ -95,7 +95,7 @@ class Card{
         $query = $conexão->query("SELECT * FROM card");
         $result = $query->fetchAll();
         foreach($result as $row){
-            $Documento = $row['salao_doc'];
+            $Documento = $row['documentoSalao_card'];
             $Bairro = $this->getBairro($Documento);
             $Foto = $row['foto'];
             $Nome = $row['nome'];
@@ -110,13 +110,13 @@ class Card{
     }
 
     public function cardEdicao($documento){
-        $Crud = new Crud('barbearia','root', '');
-        $Crud->SetBancoDeDados();
-        $conexão = $Crud->conectar();
-        $query = $conexão->query("SELECT * FROM card WHERE salao_doc = '$documento'");
+        $CrudcardEdicao = new Crud();
+        $CrudcardEdicao->SetBancoDeDados();
+        $conexão = $CrudcardEdicao->conectar();
+        $query = $conexão->query("SELECT * FROM card WHERE documentoSalao_card = '$documento'");
         $result = $query->fetchAll();
         foreach($result as $row){
-            $Documento = $row['salao_doc'];
+            $Documento = $row['documentoSalao_card'];
             $Bairro = $this->getBairro($Documento);
             $Foto = $row['foto'];
             $Nome = $row['nome'];
@@ -138,7 +138,7 @@ class Card{
                 <h5 class="card-title">nome: <input type="text" name="nome" value="'.$row['nome'].'"></h5>
                 <p class="card-text">Descrição: <input type="text" name="descricao" value="'.$row['descricao'].'"><br>
                 <p>'.$this->getStars($row["star"]).'</p>
-                <p class="card-text"><b>Local</b><br>'.$this->getBairro($documento).'<button class="btn btn-outline-warning mx-1" href="../view/perfilFornecedor">Trocar Bairro</button></p>
+                <p class="card-text"><b>Local</b><br>'.$this->getBairro($documento).'<a class="btn btn-outline-warning mx-1" href="../view/perfilFornecedor.php">Trocar Bairro</a></p>
                 <p class="card-text"><b>Especialização</b><br><input type="text" name="especializacao" value="'.$row['especializacao'].'"></p>
                 <div class="row justify-content-md-center">
                 <button type="submit" name="exe" value="AlterarCards" class="btn btn-outline-success col-lg-auto mb-auto m-xs-auto">Salvar Informações</button>

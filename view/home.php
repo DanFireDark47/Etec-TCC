@@ -29,9 +29,8 @@
     }
     if(isset($_SESSION['logado'])){
         if($_SESSION['logado'] && $_SESSION['tipoConta'] == "Fornecedor"){
-        $agenda1->constructAgenda();
-        $agenda2->constructAgenda();
-        $agenda3->constructAgenda();
+        $agenda = new AgendaFornecedor();
+        $agenda->AgendaHomeConstructor();
         }
     }else{
         $card->constructCardsPage();

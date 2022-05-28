@@ -51,7 +51,7 @@
       <input type="number" name="numero" class="form-control" required>
       
       <label class="form-label my-1">Cidade</label>
-      <input type="number" name="cidade" class="form-control" required>
+      <input type="text" name="cidade" class="form-control" required>
 
       <label class="form-label my-1">Estado</label>
       <input type="text" name="estado" class="form-control" required>

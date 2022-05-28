@@ -9,7 +9,8 @@
     include("../modals/header.php");
     include("../modals/agenda.php");
     include("../controller/loginAuth.php");
-    include("../modals/crud.php");
+    include("../modals/servico.php");
+    
     $Header->Construct();
     $loginAuth->BloqueioParaUsuariosDeslogados();
 
@@ -39,7 +40,7 @@
     $Crud2 = new Crud();
     $Crud2->SetBancoDeDados();
     $conexão2 = $Crud2->conectar();
-    $query2 = $conexão->prepare("SELECT foto FROM card WHERE salao_doc =:documento");
+    $query2 = $conexão->prepare("SELECT foto FROM card WHERE documentoSalao_card =:documento");
     $query2->bindParam(":documento",$id,PDO::PARAM_INT);
     $query2->execute();
     $row2 = $query2->fetch(PDO::FETCH_ASSOC);
@@ -56,6 +57,7 @@
 
 
 <main>
+    <form method="POST" action="../modals/crudExe.php">
     <div class="text-center bg-dark text-white p-3 m-2 rounded-3">
         <div class="float-md-start bg-dark mb-3">
             <img src="data:image/jpeg;base64,<?php echo base64_encode($foto)?>" class=" rounded-circle d-fluid img-fluid border border-4 border-secondary">
@@ -70,32 +72,29 @@
         <table class="table table-dark table-striped">
             <thead>
                 <tr>
-                <th scope="col">Tipo de produto</th>
                 <th scope="col">Nome</th>
+                <th scope="col">Descrição</th>
                 <th scope="col">Preço</th>
+                <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <td>Corte de Cabelo</td>
-                <td>Moicano</td>
-                <td>R$15.00</td>
-                </tr>
-                <tr>
-                <td>Corte de Barba</td>
-                <td>Bigode</td>
-                <td>R$10.00</td>
-                </tr>
+                <?php 
+                    $servico = new Servicos();
+                    $servico->ServicoPaginaFornecedor($id);
+
+                ?>
             </tbody>
         </table>
 
         <?php
-        $agenda1->constructAgendaPage();
-        $agenda2->constructAgendaPage();
-        $agenda3->constructAgendaPage();
+        $agenda = new AgendaFornecedor();
+        $agenda->AgendaPaginaFornecedorConstructor($id);
         ?>
-
+        <input class="btn btn-outline-success" type="submit" name="exe" value="Marcar"/>
     </div>
+    
+</form>
 </main>
 </body>
 </html>

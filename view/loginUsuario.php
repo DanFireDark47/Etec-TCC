@@ -18,6 +18,7 @@
     <h1 class="h3 mb-3 fw-normal text-white">Login</h1>
 
     <?php 
+    session_start();
     if(isset($_SESSION['ErroClienteLogin'])){
       
       if($_SESSION['ErroClienteLogin'] == true){

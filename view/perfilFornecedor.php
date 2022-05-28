@@ -12,7 +12,6 @@
     include("../modals/header.php");
     include("../modals/agenda.php");
     include("../controller/loginAuth.php");
-    include("../modals/crud.php");
     $Header->Construct();
     $loginAuth->BloqueioParaUsuariosDeslogados();
     if(!isset($_SESSION['logado'])){
@@ -33,85 +32,56 @@
 ?>
 
 <main class="text-center form-signin bg-dark p-md-3 m-md-2 text-white rounded-3">
-    
-        <form method="POST" action="../modals/crudExe.php">
-        <div class="row justify-content-between">
-            <input type="hidden" name="documento" value="<?php echo $row['documento']?>">
-            <div class="col-lg">
-                <input type="text" name="bairro" placeholder="Bairro" class="form-control mb-3" value="<?php echo $row['bairro'];?>" required>
-            </div> 
-            <div class="col">
-                <input type="text" name="cidade" placeholder="Cidade" class="form-control mb-3" value="<?php echo $row['cidade'];?>" required>
-            </div> 
-            <div class="col">
-                <input type="text" name="estado" placeholder="Estado" class="form-control mb-3" value="<?php echo $row['estado'];?>" required>
-            </div> 
-            <div class="col-lg">
-                <input type="text" name="cep" placeholder="CEP" class="form-control mb-3" value="<?php echo $row['cep'];?>" required>
-            </div> 
-            <div class="col">
-                <input type="text" name="endereco" placeholder="Endereco" class="form-control mb-3" value="<?php echo $row['endereco'];?>" required>
-            </div> 
-            <div class="col">
-                <input type="text" name="numero" placeholder="Numero" class="form-control mb-3" value="<?php echo $row['numero'];?>" required>     
+    <!--Mudar Informações de Localização-->
+    <form method="POST" action="../modals/crudExe.php">
+            <div class="row justify-content-between">
+                <div class="col-lg">
+                    <input type="text" name="bairro" placeholder="Bairro" class="form-control mb-3" value="<?php echo $row['bairro'];?>" required>
+                </div> 
+                <div class="col">
+                    <input type="text" name="cidade" placeholder="Cidade" class="form-control mb-3" value="<?php echo $row['cidade'];?>" required>
+                </div> 
+                <div class="col">
+                    <input type="text" name="estado" placeholder="Estado" class="form-control mb-3" value="<?php echo $row['estado'];?>" required>
+                </div> 
+                <div class="col-lg">
+                    <input type="text" name="cep" placeholder="CEP" class="form-control mb-3" value="<?php echo $row['cep'];?>" required>
+                </div> 
+                <div class="col">
+                    <input type="text" name="endereco" placeholder="Endereco" class="form-control mb-3" value="<?php echo $row['endereco'];?>" required>
+                </div> 
+                <div class="col">
+                    <input type="text" name="numero" placeholder="Numero" class="form-control mb-3" value="<?php echo $row['numero'];?>" required>     
+                </div>
+                <div class="col-lg">
+                    <input type="text" name="complemento" placeholder="Complemento" value="<?php echo $row['complemento'];?>" class="form-control mb-3">
+                </div>
             </div>
-            <div class="col-lg">
-                <input type="text" name="complemento" placeholder="Complemento" value="<?php echo $row['complemento'];?>" class="form-control mb-3">
-            </div>
-        </div>
-            <input type="submit" class="btn btn-outline-primary" name="exe" value="Atualizar Informações"/></a>
-        </form>
-    <form method="POST" action="classes/crud.php">
+            <input type="submit" class="btn btn-outline-primary" name="exe" value="Atualizar Informações"/>
+    </form>
+
+    <!--Cadastrar Horarios-->
+    <form method="POST" action="../modals/crudExe.php">
         <h3>Disponibilizar Horário</h3>
         <div class="form-group">
-            <label">Dia da Semana</label>
-            <select class="form-control">
-            <option>Segunda-Feira</option>
-            <option>Terça-Feira</option>
-            <option>Quarta-Feira</option>
-            <option>Quinta-Feira</option>
-            <option>Sexta-Feira</option>
-            <option>Sábado</option>
-            <option>Domingo</option>
-            </select>
+            <label">Data</label>
+            <input type="date" name="data" class="form-control" required>
+            <label>Horario</label>
+            <input type="time" name="hora" class="form-control" required>
         </div>
-        <div class="form-group">
-            <label class="h4">Horário</label><br>
-            <div class="border p-2 bg-secondary bg-opacity-10 border-3 rounded-3 border-secondary">
-            <label class="h5 form-check-label">Manhã</label><br>
-            <input type="checkbox" class="form-check-input"> 5:00</input><br>
-            <input type="checkbox" class="form-check-input"> 6:00</input><br>
-            <input type="checkbox" class="form-check-input"> 7:00</input><br>
-            <input type="checkbox" class="form-check-input"> 8:00</input><br>
-            <input type="checkbox" class="form-check-input"> 9:00</input><br>
-            <input type="checkbox" class="form-check-input"> 10:00</input><br>
-            <input type="checkbox" class="form-check-input"> 11:00</input><br>
-            </div>
-            <div class="border p-2 mt-1 bg-secondary bg-opacity-10 border-3 rounded-3 border-secondary">
-            <label class="h5 form-check-label">Tarde</label><br>
-            <input type="checkbox" class="form-check-input"> 12:00</input><br>
-            <input type="checkbox" class="form-check-input"> 13:00</input><br>
-            <input type="checkbox" class="form-check-input"> 14:00</input><br>
-            <input type="checkbox" class="form-check-input"> 15:00</input><br>
-            <input type="checkbox" class="form-check-input"> 16:00</input><br>
-            <input type="checkbox" class="form-check-input"> 17:00</input><br>
-            </div>
-            <div class="border p-2 bg-secondary bg-opacity-10 mt-1 border-3 rounded-3 border-secondary">
-            <label class="h5 form-check-label">Noite</label><br>
-            <input type="checkbox" class="form-check-input"> 18:00</input><br>
-            <input type="checkbox" class="form-check-input"> 19:00</input><br>
-            <input type="checkbox" class="form-check-input"> 20:00</input><br>
-            <input type="checkbox" class="form-check-input"> 21:00</input><br>
-            <input type="checkbox" class="form-check-input"> 22:00</input><br>
-            <input type="checkbox" class="form-check-input"> 23:00</input><br>
-            </div>
-
-        <input type="submit" class="btn mt-1 btn-outline-primary"/>
-    </form>
-
-    
-    </div>
+        <input type="submit" name="exe" class="btn mt-1 btn-outline-primary" value="Cadastrar Data e Horario"/>
     </form>
 </main>
+<div>
+    <?php
+        $agenda = new AgendaFornecedor();
+        $agenda->perfilEdicaoConstruct($_SESSION['documento']);
+    ?>
+
+
+
+</div>
+</div>';
+</div>
 </body>
 </html>

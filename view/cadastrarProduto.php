@@ -13,6 +13,7 @@
     include("../modals/agenda.php");
     include("../controller/loginAuth.php");
     include("../modals/cards.php");
+    include("../modals/servico.php");
     $Header->Construct();
     $loginAuth->BloqueioParaUsuariosDeslogados();
     if(!isset($_SESSION['logado'])){
@@ -25,63 +26,28 @@
 ?>
     <!-- Cadastrar Produto -->
     <div class="text-center bg-dark text-white border p-3 m-1 rounded-2">
-    <form method="POST" action="../modals/crud.php">
-                <label class="h3">Cadastrar Produto</label><br>
-                <label class="h5 form-label">Tipo de Produto</label>
-                <select class="form-select ">
-                    <option selected>Corte De Cabelo</option>
-                    <option value="1">Corte De Barba</option>
-                    <option value="2">Tratamento de Cabelo</option>
-                    <option value="3">Tratamento de Barba</option>
-                    <option value="4">Produto Único</option>
-                    <option value="5">Pacote de Produtos</option>
-                </select>
-                <div class="row">
-                    <div class="my-1 col-md-4">
-                        <input type="text" value="" class="form-control" placeholder="Nome do Produto">
+    <form method="POST" action="../modals/crudExe.php">
+                <label class="h3">Cadastrar Serviço</label><br>
+                <div class="row justify-content-between">
+                    <div class="my-1 col-lg">
+                        <input type="text" name="nomeServico" class="form-control" placeholder="Nome do Produto">
                     </div>
-                    <div class="my-1 col-md-4">
-                        <input type="number" value="" class="form-control" placeholder="Preço do Produto">
+                    <div class="my-1 col-lg">
+                        <input type="text" name="descricaoServico" class="form-control" placeholder="Descrição do Produto">
                     </div>
-                    <div class="my-1 col-md-4">
-                        <input type="number" value="" class="form-control" placeholder="Quantidade em estoque">
+                    <div class="my-1 col-lg">
+                        <input type="text" name="precoServico" class="form-control" placeholder="Preço do Produto">
                     </div>
                 </div>
 
-            <input type="submit" class="btn mt-1 btn-outline-primary"/>
+            <input type="submit" name="exe" value="Cadastrar Produto" class="btn mt-1 btn-outline-primary"/>
         </form>
     </div>
     <!-- Produtos Cadastrados -->
-    <div class="text-center bg-dark text-white border p-3 mx-auto mt rounded-2">
-        <label class="h3">Produtos Cadastrados</label><br>
-        <table class="border rounded-2 bg-dark bg-opacity-25 d-md-inline-block align-center bg-opacity-50 p-2">
-            
-                <tr>
-                    <td scope="col">Nome</td>
-                    <td scope="col">Preço</td>
-                    <td scope="col">Quantidade</td>
-                    <td scope="col"></td>
-                </tr>
-                <tr>
-                    <td>Corte De Cabelo</td>
-                    <td>R$ 50,00</td>
-                    <td>10</td>
-                    <td><a href="#" class="btn btn-primary">Editar</a></td>
-                </tr>
-                <tr>
-                    <td>Corte De Barba</td>
-                    <td>R$ 50,00</td>
-                    <td>10</td>
-                    <td><a href="#" class="btn btn-primary">Editar</a></td>
-                </tr>
-                <tr>
-                    <td>Corte De Barba</td>
-                    <td>R$ 50,00</td>
-                    <td>10</td>
-                    <td><a href="#" class="btn btn-primary">Editar</a></td>
-                </tr>
-        </table>
-</div>
+    <?php
+        $servico = new Servicos();
+        $servico->editarServico($_SESSION['documento']);
+    ?>
 <!--Card Edição-->
 <?php
 

@@ -15,9 +15,8 @@
     $Header->Construct();
         if($_SESSION['logado'] == true && $_SESSION['tipoConta'] == "Usuario"){
             include('../modals/agenda.php');
-            $agenda1->constructAgenda();
-            $agenda2->constructAgenda();
-            $agenda3->constructAgenda();
+            $agenda = new AgendaCliente();
+            $agenda->AgendaClienteConstructor($_SESSION['documento']);
         }elseif($_SESSION['logado'] == true && $_SESSION['tipoConta'] == "Fornecedor"){
             header("Location:home.php");
         }elseif($_SESSION['logado'] == false){
