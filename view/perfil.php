@@ -27,7 +27,7 @@
     </h5>
     */?>
     <a class="btn btn-dark my-1" href="../view/home.php">Home</a><br>
-    <form method="POST" action="../modals/crudEXE.php">
+    <form method="POST" action="../modals/crudExe.php">
         <button class="btn btn-dark my-2" name="exe" value="deslogar" href="../modals/crud.php">Deslogar</a><br>
     </form>
     <form method="POST" action="../modals/crudExe.php">

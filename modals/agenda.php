@@ -13,10 +13,13 @@ Class AgendaFornecedor{
         $query->execute();
         $result = $query->fetchAll();
         foreach($result as $row){
-            $id = $row['id'];
-            $hora = $row['horario'];
-            $data = $row['data'];
-            $this->AgendaEdicao($id,$hora,$data);
+            if($row['documentoCliente_agenda'] == NULL){
+                $id = $row['id'];
+                $hora = $row['horario'];
+                $data = $row['data'];
+                $this->AgendaEdicao($id,$hora,$data);
+            }
+            
         }
 
     }
