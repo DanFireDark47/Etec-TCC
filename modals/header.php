@@ -115,12 +115,39 @@ class Header{
             </button>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item">
-                <a class="nav-link" href="../view/cadastroUsuario.php">Fazer Cadastro</a>
+           
+            
+        <div>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Cadastro
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item" href="cadastroUsuario.php">Usuário</a></li>
+                <li><a class="dropdown-item" href="cadastroFornecedor.php">Fornecedor</a></li>
+              </ul>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../view/loginUsuario.php">Fazer Login</a>
+          </ul>
+        </div>
+
+
+          
+        <div>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Login
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item" href="loginUsuario.php">Usuário</a></li>
+                <li><a class="dropdown-item" href="loginFornecedor.php">Fornecedor</a></li>
+              </ul>
             </li>
+          </ul>
+        </div>
+
+        
             <li class="nav-item">
             <a class="nav-link" href="../view/quemSomosNós.php">Quem somos nós</a>
             </li>

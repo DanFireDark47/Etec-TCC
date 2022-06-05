@@ -185,22 +185,36 @@ if(isset($_POST['exe']) && $_POST['exe'] == 'loginCliente'){
     header('Location: ../view/perfilFornecedor.php');
 }else if($_POST['exe'] == 'AlterarCards'){
     session_start();
-    $foto = base64_decode($_POST['foto']);
+    $foto = $_FILES['foto'];
     $documento = $_SESSION['documento'];
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
     $especializacao = $_POST['especializacao'];
+    
+    //trata a imagem
+    $nome_imagem = $foto['name'];
+    $tamanho_imagem = $foto['size'];
+    $tipo_imagem = $foto['type'];
+    $diretorio_imagem = "../imgs/imagens BD/";
+    $lowercase = strtolower(pathinfo($nome_imagem, PATHINFO_EXTENSION));
+    $nomeArquivo = $documento.".".$lowercase;
 
-    $Crud->SetBancoDeDados();
-    $conexão = $Crud->conectar();
-    $query = $conexão->prepare("UPDATE card SET foto =:foto, nome =:nome, descricao =:descricao, especializacao =:especializacao WHERE documentoSalao_card =:documento");
-    $query->bindParam(":foto",$foto,PDO::PARAM_STR);
-    $query->bindParam(":nome",$nome,PDO::PARAM_STR);
-    $query->bindParam(":descricao",$descricao,PDO::PARAM_STR);
-    $query->bindParam(":especializacao",$especializacao,PDO::PARAM_STR);
-    $query->bindParam(":documento",$documento,PDO::PARAM_STR);
-    $query->execute();
-    header('Location: ../view/cadastrarProduto.php');
+        $fotoFinal = move_uploaded_file($foto['tmp_name'], $diretorio_imagem.$documento.".".$lowercase);
+        $path = $diretorio_imagem.$documento.".".$lowercase;
+            $Crud->SetBancoDeDados();
+            $conexão = $Crud->conectar();
+            $query = $conexão->prepare("UPDATE card SET foto_name =:foto_name,foto_path =:foto_path, nome =:nome, descricao =:descricao, especializacao =:especializacao WHERE documentoSalao_card =:documento");
+        
+            $query->bindParam(":foto_name",$nomeArquivo,PDO::PARAM_STR);
+            $query->bindParam(":foto_path",$path,PDO::PARAM_STR);
+        
+            $query->bindParam(":nome",$nome,PDO::PARAM_STR);
+            $query->bindParam(":descricao",$descricao,PDO::PARAM_STR);
+            $query->bindParam(":especializacao",$especializacao,PDO::PARAM_STR);
+            $query->bindParam(":documento",$documento,PDO::PARAM_STR);
+            $query->execute();
+            header('Location: ../view/cadastrarProduto.php');
+
 }else if($_POST['exe'] == 'Cadastrar Data e Horario'){
     session_start();
     $data = $_POST['data'];

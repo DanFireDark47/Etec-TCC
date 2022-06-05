@@ -50,6 +50,8 @@
     ?>
 <!--Card Edição-->
 <?php
+?>
+<?php
 
     $documento = $_SESSION['documento'];
     $card->cardEdicao($documento);

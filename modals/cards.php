@@ -61,7 +61,7 @@ class Card{
     echo '<div class="d-inline-block m-4">
     <form method="POST" action="paginaFornecedor.php">
     <div class="card border border-5 border-dark d-md-inline-block m-4 bg-dark text-white" style="width: 18rem;">
-    <img  src="data:image/jpeg;base64,'.base64_encode($foto).'" class="card-img-top" alt="Foto da Barbearia">
+    <img  src="'.$foto.'" class="card-img-top" alt="Foto da Barbearia">
     <div class="card-body">
         <h5 class="card-title">'.$nome.'</h5>
         <p class="card-text">'.$descricao.'<br><p>'.Self::getStars($star).'</p></p>
@@ -97,7 +97,12 @@ class Card{
         foreach($result as $row){
             $Documento = $row['documentoSalao_card'];
             $Bairro = $this->getBairro($Documento);
-            $Foto = $row['foto'];
+            if($row['foto_path'] == NULL){
+                $Foto = '../imgs/SemFoto.png';
+            }else{
+                $Foto = $row['foto_path'];
+            }
+            
             $Nome = $row['nome'];
             $Descricao = $row['descricao'];
             $Preco = $row['preco'];
@@ -118,7 +123,11 @@ class Card{
         foreach($result as $row){
             $Documento = $row['documentoSalao_card'];
             $Bairro = $this->getBairro($Documento);
-            $Foto = $row['foto'];
+            if($row['foto_path'] == NULL){
+                $Foto = '../imgs/SemFoto.png';
+            }else{
+                $Foto = $row['foto_path'];
+            }
             $Nome = $row['nome'];
             $Descricao = $row['descricao'];
             $Preco = $row['preco'];
@@ -129,9 +138,9 @@ class Card{
 
         echo '<div class="bg-secondary float-end">
         <div class="d-inline-block m-4">
-            <form method="POST" action="../modals/crudExe.php">
+            <form method="POST" enctype="multipart/form-data" action="../modals/crudExe.php">
             <div class="card border border-5 border-dark d-md-inline-block m-4 bg-dark text-white" style="width: 18rem;">
-            <img  src="data:image/jpeg;base64,'.base64_encode($Foto).'" class="card-img-top" alt="Foto da Barbearia">
+            <img  src="'.$Foto.'" class="card-img-top" alt="Foto da Barbearia">
             <label>Foto da Barbearia</label>
                 <input type="file" name="foto"></input>
             <div class="card-body">

@@ -65,7 +65,7 @@
         <h3>Disponibilizar Horário</h3>
         <div class="form-group">
             <label">Data</label>
-            <input type="date" name="data" class="form-control" required>
+            <input type="date" name="datetime" class="form-control" required>
             <label>Horario</label>
             <input type="time" name="hora" class="form-control" required>
         </div>

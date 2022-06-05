@@ -40,15 +40,15 @@
     $Crud2 = new Crud();
     $Crud2->SetBancoDeDados();
     $conexão2 = $Crud2->conectar();
-    $query2 = $conexão->prepare("SELECT foto FROM card WHERE documentoSalao_card =:documento");
+    $query2 = $conexão->prepare("SELECT foto_path FROM card WHERE documentoSalao_card =:documento");
     $query2->bindParam(":documento",$id,PDO::PARAM_INT);
     $query2->execute();
     $row2 = $query2->fetch(PDO::FETCH_ASSOC);
     if($row2){
-        if(is_null($row2['foto'])){
-            $foto = "../imgs/semFoto.png";
+        if(is_null($row2['foto_path'])){
+            $foto = "../imgs/SemFoto.png";
         }else{
-            $foto = $row2['foto'];
+            $foto = $row2['foto_path'];
         }
     }
     
@@ -60,7 +60,7 @@
     <form method="POST" action="../modals/crudExe.php">
     <div class="text-center bg-dark text-white p-3 m-2 rounded-3">
         <div class="float-md-start bg-dark mb-3">
-            <img src="data:image/jpeg;base64,<?php echo base64_encode($foto)?>" class=" rounded-circle d-fluid img-fluid border border-4 border-secondary">
+            <img src="<?php echo $foto;?>" class=" rounded-circle d-fluid img-fluid border border-4 border-secondary">
             <h1 class=""><?php echo $row['nome']; ?></h1>
         </div>
         <div class="float-md-end p-md-3 border border-2 bg-opacity-25 bg-secondary">
@@ -90,8 +90,15 @@
         <?php
         $agenda = new AgendaFornecedor();
         $agenda->AgendaPaginaFornecedorConstructor($id);
+
+        if($_SESSION['tipoConta'] == 'Usuario'){
+            echo '<input class="btn btn-outline-success" type="submit" name="exe" value="Marcar"/>';
+        }else{
+            echo '<input class="btn btn-outline-success disabled" type="submit" name="exe" value="Marcar"/>';
+        }
         ?>
-        <input class="btn btn-outline-success" type="submit" name="exe" value="Marcar"/>
+        
+        
     </div>
     
 </form>

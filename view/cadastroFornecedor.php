@@ -31,10 +31,10 @@
       <br><b>Contato</b><br>
 
       <label class="form-label my-1">Telefone</label>
-      <input type="number" name="telefone" class="form-control" required>
+      <input type="number"  data-mask="(00) 00000-0000"  name="telefone" class="form-control" required>
 
       <label class="form-label my-1">Celular</label>
-      <input type="number" name="celular" class="form-control">
+      <input type="number"  data-mask="(00) 00000-0000"  name="celular" class="form-control">
 
       <br><b>Endereço</b><br>
 
