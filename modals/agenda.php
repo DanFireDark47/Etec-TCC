@@ -1,6 +1,9 @@
 <?php
 
 include_once("../modals/crud.php");
+include_once("../controller/formatadorData.php");
+
+
 
 Class AgendaFornecedor{
 
@@ -23,8 +26,9 @@ Class AgendaFornecedor{
         }
 
     }
-
     public function AgendaEdicao($id,$horario,$data){
+        $dataFormatador = new DataFormatador();
+        $dataFormatada = $dataFormatador->DataFormatar($data);
         echo '
         <form method="POST" action="../modals/crudExe.php">
         <div class="bg-dark rounded-3 text-white text-center m-2 p-2">
@@ -35,7 +39,7 @@ Class AgendaFornecedor{
             </div>
             <div class="row row-cols-3">
                 <input type="hidden" name="id" value="'.$id.'">
-                <div class="col">'.$data.'</div>
+                <div class="col">'.$dataFormatada.'</div>
                 <div class="col">'.$horario.'</div>
                 <div class="col"><input type="submit" class="btn btn-danger" name="exe" value="Deletar Horario"/></div>
             </div>
@@ -62,6 +66,8 @@ Class AgendaFornecedor{
     }
 
     public function AgendaFornecedorPag($hora,$data,$id){
+        $dataFormatador = new DataFormatador();
+        $dataFormatada = $dataFormatador->DataFormatar($data);
         echo '
         <div class="bg-dark rounded-3 text-white text-center m-2 p-2">
             <div class="row row-cols-3 text-info">
@@ -70,9 +76,9 @@ Class AgendaFornecedor{
                 <div class="col"></div>
             </div>
             <div class="row row-cols-3">
-                <div class="col">'.$data.'</div>
+                <div class="col">'.$dataFormatada.'</div>
                 <div class="col">'.$hora.'</div>
-                <div class="col"><input class="form-check-input" type="radio" class="" name="idAgenda" value="'.$id.'"/></div>
+                <div class="col"><input class="form-check-input" type="radio" name="idAgenda" value="'.$id.'"/></div>
             </div>
         </div>
         ';
@@ -107,8 +113,11 @@ Class AgendaFornecedor{
     }
 
     public function AgendaHomePagina($hora,$data,$id,$nome,$telefone){
+        $dataFormatador = new DataFormatador();
+        $dataFormatada = $dataFormatador->DataFormatar($data);
         echo '
         <div class="bg-dark rounded-3 text-white text-center m-2 p-2">
+        <form action="../modals/crudExe.php" method="POST">
             <div class="row row-cols-5 text-info">
                 <div class="col">Nome</div>
                 <div class="col">Telefone</div>
@@ -117,12 +126,14 @@ Class AgendaFornecedor{
                 <div class="col"></div>
             </div>
             <div class="row row-cols-5">
+            
                 <input type="hidden" name="idAgenda" value="'.$id.'">
                 <div class="col">'.$nome.'</div>
                 <div class="col">'.$telefone.'</div>
-                <div class="col">'.$data.'</div>
+                <div class="col">'.$dataFormatada.'</div>
                 <div class="col">'.$hora.'</div>
                 <div class="col"><input type="submit" class="btn btn-outline-danger" name="exe" value="Cancelar"/></div>
+                </form>
             </div>
         </div>
         ';
@@ -162,6 +173,8 @@ Class AgendaCliente{
     }
 
     public function AgendaClientePagina($hora,$data,$id,$nome,$telefone,$documentoSalao){
+        $dataFormatador = new DataFormatador();
+        $dataFormatada = $dataFormatador->DataFormatar($data);
         echo '
         <div class="bg-dark rounded-3 text-white text-center m-2 p-2">
             <div class="row row-cols-6 text-info">
@@ -173,16 +186,18 @@ Class AgendaCliente{
                 <div class="col"></div>
             </div>
             <div class="row row-cols-6">
-                <input type="hidden" name="idAgenda" value="'.$id.'">
                 <div class="col">'.$nome.'</div>
                 <div class="col">'.$telefone.'</div>
-                <div class="col">'.$data.'</div>
+                <div class="col">'.$dataFormatada.'</div>
                 <div class="col">'.$hora.'</div>
                 <form method="POST" action="../view/paginaFornecedor.php">
                     <input type="hidden" name="id" value="'.$documentoSalao.'">
                     <div class="col"><input type="submit" class="btn btn-outline-warning" value="Ver Localização"/></div>
                 </form>
-                <div class="col"><input type="submit" class="btn btn-outline-danger" name="exe" value="Cancelar"/></div>
+                <form method="POST" action="../modals/crudExe.php">
+                    <input type="hidden" name="idAgenda" value="'.$id.'">
+                    <div class="col"><input type="submit" class="btn btn-outline-danger" name="exe" value="Cancelar"/></div>
+                </form>
             </div>
         </div>
         ';

@@ -37,8 +37,8 @@ Class Servicos{
                 <div class="col"><input type="text" name="descricaoServico" value="'.$descricao.'" class="form-control"/></div>
                 <div class="col"><input type="text" name="precoServico" value="'.$preco.'" class="form-control"/></div>
                 <div class="col">
-                    <input type="submit" class="btn btn-danger" name="exe" value="Deletar Serviço"/><br>
-                    <input type="submit" class="btn btn-success" name="exe" value="Editar Serviço"/>
+                    <input type="submit" class="btn m-1 btn-danger" name="exe" value="Deletar Serviço"/><br>
+                    <input type="submit" class="btn m-1 btn-success" name="exe" value="Editar Serviço"/>
                 </div>
             </div>
         </div>

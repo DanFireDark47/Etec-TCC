@@ -59,17 +59,143 @@
             </div>
             <input type="submit" class="btn btn-outline-primary" name="exe" value="Atualizar Informações"/>
     </form>
-
+</main>
     <!--Cadastrar Horarios-->
+<main class="text-center bg-dark p-md-3 m-md-2 text-white rounded-3">
+    <p>
+        <h3>Disponibilizar Horarios</h3>
+  <button class="mt-3 btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#UmAUm" aria-expanded="false" aria-controls="collapseExample">
+    Disponibilizar Horario Um a Um
+  </button>
+  <button class="mt-3 btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#Sortido" aria-expanded="false" aria-controls="collapseExample">
+    Disponibilizar Horarios Sortidos
+  </button>
+</p>
+    <div class="collapse" id="UmAUm">
+    <div class="card text-dark card-body text-center form-signin bg-dark p-md-3 m-md-2 text-white rounded-3 border border-1">
     <form method="POST" action="../modals/crudExe.php">
-        <h3>Disponibilizar Horário</h3>
+            <h3>Um a Um</h3>
+            <label>Selecione os horarios um a um</label>
+            <div class="form-group">
+                <label">Data</label>
+                <input type="date" name="datetime" class="form-control" required>
+                <label>Horario</label>
+                <input type="time" name="hora" class="form-control" required>
+            </div>
+            <input type="submit" name="exe" class="btn mt-1 btn-outline-primary" value="Cadastrar Data e Horario"/>
+        </form>
+    </div>
+    </div>
+    <?php
+    if(isset($_SESSION['mes'])){
+        echo '<div class="collapsing" id="Sortido">';
+    }else{
+        echo '<div class="collapse" id="Sortido">';
+    }
+    ?>
+    
+        
+        <div class="card text-dark card-body text-center form-signin bg-dark p-md-3 m-md-2 text-white rounded-3">
+        <h3>Horarios Sortidos</h3>
+        <h4>Selecionar mês</h4>
+        <form method="POST" action="perfilFornecedor.php">
         <div class="form-group">
-            <label">Data</label>
-            <input type="date" name="datetime" class="form-control" required>
-            <label>Horario</label>
-            <input type="time" name="hora" class="form-control" required>
+            <?php
+            if(isset($_POST['mes'])){
+                echo'<input type="month" name="mes" class="form-control" value="'.$_POST["mes"].'">';
+            }else{
+                echo'<input type="month" name="mes" class="form-control">';
+            }
+            ?>
+            
+            <input type="submit" class="btn m-2 btn-outline-success" value="Escolher Mês">
         </div>
-        <input type="submit" name="exe" class="btn mt-1 btn-outline-primary" value="Cadastrar Data e Horario"/>
+        </form>
+        <label>selecione os dias e depois os horarios que o salão estará atendendo nos dias já selecionados</label>
+        </div>
+        <p>
+        <button class="mt-3 btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#SelecionarDias" aria-expanded="false" aria-controls="collapseExample">
+            Selecionar Dias
+        </button>
+        <button class="mt-3 btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#SelecionarHorarios" aria-expanded="false" aria-controls="collapseExample">
+            Selecionar Horarios
+        </button>
+        </p>
+        <div class="collapse" id="SelecionarDias"> 
+            <div class="list-group border border-3 border-white">
+            <form action="../modals/crudExe.php" method="POST">
+            <?php
+            $semana = array(
+                'Sun' => 'Domingo', 
+                'Mon' => 'Segunda-Feira',
+                'Tue' => 'Terca-Feira',
+                'Wed' => 'Quarta-Feira',
+                'Thu' => 'Quinta-Feira',
+                'Fri' => 'Sexta-Feira',
+                'Sat' => 'Sábado'
+            );
+
+
+                if(isset($_POST['mes']) && $_POST['mes'] != ''){
+                        $dataOriginal = $_POST['mes'];
+                        $data = explode('-', $dataOriginal);
+                        $mes = $data[1];
+                        $mesAtual = date('m');
+                        $diasAtuais = mktime(0, 0, 0, date('m'), date('d'), date('Y'));
+                        $dias = date('t', $mes);
+                        echo '
+                            <input type="hidden" name="mes" value="'.$dataOriginal.'">';
+                        for($i = 1; $i < $dias; $i++){
+                            if($mes < $mesAtual){
+                            echo '<label class="list-group-item bg-dark text-white">
+                                <input class="form-check-input me-1" type="checkbox" name="dia[]" value="'.$i.'" disabled>
+                                Dia '.$i.' - '.$semana[date('D', mktime(0,0,0,$mes,$i,2022))].'
+                                </label>';
+                            }else if($mes == $mesAtual){
+                                if($i < date('d')){
+                                    echo '<label class="list-group-item bg-dark text-white">
+                                    <input class="form-check-input me-1" type="checkbox" name="dia[]" value="'.$i.'" disabled>
+                                    Dia '.$i.' - '.$semana[date('D', mktime(0,0,0,$mes,$i,2022))].'
+                                    </label>';
+                                }else{
+                                    echo '<label class="list-group-item bg-dark text-white">
+                                    <input class="form-check-input me-1" type="checkbox" name="dia[]" value="'.$i.'">
+                                    Dia '.$i.' - '.$semana[date('D', mktime(0,0,0,$mes,$i,2022))].'
+                                    </label>';
+                                }
+                            }else{
+                                echo '<label class="list-group-item bg-dark text-white">
+                                <input class="form-check-input me-1" type="checkbox" name="dia[]" value="'.$i.'">
+                                Dia '.$i.' - '.$semana[date('D', mktime(0,0,0,$mes,$i,2022))].'
+                                </label>';                            
+                            }
+                        }
+                }else{
+                    echo "selecione o mes";
+                }
+                
+
+                
+            ?>
+            </div>       
+        </div>
+        <div class="collapse" id="SelecionarHorarios"> 
+            <div class="list-group border border-3 border-white">
+            <?php
+                for($horario = 6; $horario <= 21; $horario++){
+                    echo '<label class="list-group-item bg-dark text-white">
+                    <input class="form-check-input me-1" type="checkbox" name="horario[]" value="'.$horario.':00">
+                    Horario '.$horario.':00
+                    </label> <label class="list-group-item bg-dark text-white">
+                    <input class="form-check-input me-1" type="checkbox" name="horario[]" value="'.$horario.':30">
+                    Horario '.$horario.':30
+                    </label>';
+                }
+            ?>
+            </div>
+        </div>
+        <input type="submit" class="mt-2 btn btn-outline-success" name="exe" value="Cadastrar Dias e Horarios">
+    </div>
     </form>
 </main>
 <div>

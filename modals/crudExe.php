@@ -185,26 +185,27 @@ if(isset($_POST['exe']) && $_POST['exe'] == 'loginCliente'){
     header('Location: ../view/perfilFornecedor.php');
 }else if($_POST['exe'] == 'AlterarCards'){
     session_start();
+    $preco = $_POST['serviço'];
     $foto = $_FILES['foto'];
     $documento = $_SESSION['documento'];
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
     $especializacao = $_POST['especializacao'];
-    
-    //trata a imagem
-    $nome_imagem = $foto['name'];
-    $tamanho_imagem = $foto['size'];
-    $tipo_imagem = $foto['type'];
-    $diretorio_imagem = "../imgs/imagens BD/";
-    $lowercase = strtolower(pathinfo($nome_imagem, PATHINFO_EXTENSION));
-    $nomeArquivo = $documento.".".$lowercase;
+    if(empty($_POST['foto'])){
+        //trata a imagem
+        $nome_imagem = $foto['name'];
+        $tamanho_imagem = $foto['size'];
+        $tipo_imagem = $foto['type'];
+        $diretorio_imagem = "../imgs/imagens BD/";
+        $lowercase = strtolower(pathinfo($nome_imagem, PATHINFO_EXTENSION));
+        $nomeArquivo = $documento.".".$lowercase;
 
         $fotoFinal = move_uploaded_file($foto['tmp_name'], $diretorio_imagem.$documento.".".$lowercase);
         $path = $diretorio_imagem.$documento.".".$lowercase;
             $Crud->SetBancoDeDados();
             $conexão = $Crud->conectar();
-            $query = $conexão->prepare("UPDATE card SET foto_name =:foto_name,foto_path =:foto_path, nome =:nome, descricao =:descricao, especializacao =:especializacao WHERE documentoSalao_card =:documento");
-        
+            $query = $conexão->prepare("UPDATE card SET preco=:preco,foto_name =:foto_name,foto_path =:foto_path, nome =:nome, descricao =:descricao, especializacao =:especializacao WHERE documentoSalao_card =:documento");
+            $query->bindParam(":preco",$preco,PDO::PARAM_STR);
             $query->bindParam(":foto_name",$nomeArquivo,PDO::PARAM_STR);
             $query->bindParam(":foto_path",$path,PDO::PARAM_STR);
         
@@ -214,6 +215,21 @@ if(isset($_POST['exe']) && $_POST['exe'] == 'loginCliente'){
             $query->bindParam(":documento",$documento,PDO::PARAM_STR);
             $query->execute();
             header('Location: ../view/cadastrarProduto.php');
+    }else{
+        $Crud->SetBancoDeDados();
+        $conexão = $Crud->conectar();
+        $query = $conexão->prepare("UPDATE card SET preco=:preco, nome =:nome, descricao =:descricao, especializacao =:especializacao WHERE documentoSalao_card =:documento");
+        $query->bindParam(":preco",$preco,PDO::PARAM_STR);
+        $query->bindParam(":nome",$nome,PDO::PARAM_STR);
+        $query->bindParam(":descricao",$descricao,PDO::PARAM_STR);
+        $query->bindParam(":especializacao",$especializacao,PDO::PARAM_STR);
+        $query->bindParam(":documento",$documento,PDO::PARAM_STR);
+        $query->execute();
+        header('Location: ../view/cadastrarProduto.php');
+    }
+    
+    
+    
 
 }else if($_POST['exe'] == 'Cadastrar Data e Horario'){
     session_start();
@@ -293,5 +309,34 @@ if(isset($_POST['exe']) && $_POST['exe'] == 'loginCliente'){
     $query->bindParam(":id",$id,PDO::PARAM_INT);
     $query->execute();
     header('Location: ../view/cadastrarProduto.php');
+}else if($_POST['exe'] == "Cadastrar Dias e Horarios"){
+    session_start();
+    $dias = $_POST['dia'];
+    $mes = $_POST['mes'];
+    $horarios = $_POST['horario'];
+
+    foreach($dias as $valorDias){
+        foreach($horarios as $valorHorarios){
+            $diasMontados = $mes.'-'.$valorDias;
+
+            $Crud->SetBancoDeDados();
+            $conexão = $Crud->conectar();
+            $query = $conexão->prepare("INSERT INTO agenda (data, horario, documentoSalao_agenda) VALUES (:dia, :horario, :documento)");
+            $query->bindParam(":dia",$diasMontados,PDO::PARAM_STR);
+            $query->bindParam(":horario",$valorHorarios,PDO::PARAM_STR);
+            $query->bindParam(":documento",$_SESSION['documento'],PDO::PARAM_STR);
+            $query->execute();
+        }
+        
+    }
+    header('Location: ../view/perfilFornecedor.php');
+}else if($_POST['exe'] == "Cancelar"){
+    $id = $_POST['idAgenda'];
+    $Crud->SetBancoDeDados();
+    $conexão = $Crud->conectar();
+    $query = $conexão->prepare("UPDATE agenda SET `documentoCliente_agenda` = NULL, `idServico_agenda` = NULL WHERE (`id` = :id);");
+    $query->bindParam(":id",$id,PDO::PARAM_INT);
+    $query->execute();
+    header('Location: ../view/agendaUsuario.php');
 }
 ?>
