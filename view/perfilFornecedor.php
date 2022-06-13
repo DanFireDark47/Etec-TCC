@@ -85,15 +85,9 @@
             <label>Selecione os horarios um a um</label>
             <div class="form-group">
                 <label">Data</label>
-<<<<<<< HEAD
                     <input type="date" name="date" class="form-control" required>
                 <label>Horario</label>
                     <input type="time" name="hora" class="form-control" required>
-=======
-                <input type="date" name="datetime" class="form-control" required>
-                <label>Horario</label>
-                <input type="time" name="hora" class="form-control" required>
->>>>>>> 89246c68690ae443e37c24ce63205d207e202f84
             </div>
             <input type="submit" name="exe" class="btn mt-1 btn-outline-primary" value="Cadastrar Data e Horario"/>
         </form>
