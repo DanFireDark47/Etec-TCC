@@ -114,6 +114,11 @@ class Card{
 
     }
 
+    public function SelecionaServiços($documentoSalao){
+        
+
+    }
+
     public function cardEdicao($documento){
         $CrudcardEdicao = new Crud();
         $CrudcardEdicao->SetBancoDeDados();
@@ -136,6 +141,12 @@ class Card{
             $this->Card($Documento,$Foto,$Nome,$Descricao,$Preco,$Bairro,$Star,$Especializacao);
         }
 
+        $CrudServico = new Crud('barbearia','root', '');
+        $CrudServico->SetBancoDeDados();
+        $conexão = $CrudServico->conectar();
+        $query = $conexão->query("SELECT * FROM servico WHERE documentoSalao_servico = '$documento'");
+        $result = $query->fetchAll();
+
         echo '<div class="bg-secondary float-end">
         <div class="d-inline-block m-4">
             <form method="POST" enctype="multipart/form-data" action="../modals/crudExe.php">
@@ -144,11 +155,20 @@ class Card{
             <label>Foto da Barbearia</label>
                 <input type="file" name="foto"></input>
             <div class="card-body">
-                <h5 class="card-title">nome: <input type="text" name="nome" value="'.$row['nome'].'"></h5>
+                <label class="card-title">nome:<p> <input type="text" name="nome" value="'.$row['nome'].'"></label>
                 <p class="card-text">Descrição: <input type="text" name="descricao" value="'.$row['descricao'].'"><br>
                 <p>'.$this->getStars($row["star"]).'</p>
                 <p class="card-text"><b>Local</b><br>'.$this->getBairro($documento).'<a class="btn btn-outline-warning mx-1" href="../view/perfilFornecedor.php">Trocar Bairro</a></p>
                 <p class="card-text"><b>Especialização</b><br><input type="text" name="especializacao" value="'.$row['especializacao'].'"></p>
+                    <select name="serviço" class="mb-2 form-select" aria-label="Default select example">
+                    <option selected>Escolher Preço do Serviço</option>
+                        ';foreach($result as $row){
+                            $nome = $row['nome'];
+                            $Preco = $row['preco'];
+                            echo '<option value="'.$Preco.'">'.$nome.' - R$'.$Preco.'</option>';
+                        }
+                echo '
+                    </select>
                 <div class="row justify-content-md-center">
                 <button type="submit" name="exe" value="AlterarCards" class="btn btn-outline-success col-lg-auto mb-auto m-xs-auto">Salvar Informações</button>
                 </form>

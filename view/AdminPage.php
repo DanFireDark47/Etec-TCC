@@ -9,17 +9,30 @@
 </head>
 <body class="bg-secondary">
 
-
-
-
-<!-- Conexão Com o banco de dados -->
 <?php
-    include("../modals/Crud.php");
+    session_start();
+    include("../controller/loginAuth.php");
+    $loginAuth->PermiteApenasAdmin();
 
-    $ADM->SetBancoDeDados();
-    $ADM->ADMPageContruct();
+    
+//conecta com o banco de dados e lista todos os saloes e usuarios existentes no banco dividindo eles em tabelas
+    include_once("../modals/crud.php");
+    $Crud = new Crud('barbearia', 'root', '');
+    $Crud->SetBancoDeDados();
+    $pdo = $Crud->conectar();
+    $sql = "SELECT * FROM salao";
+    $sql2 = "SELECT * FROM cliente";
+
+    $result = $pdo->query($sql);
+    $result2 = $pdo->query($sql2);
+
+    $saloes = $result->fetchAll(PDO::FETCH_ASSOC);
+    $clientes = $result2->fetchAll(PDO::FETCH_ASSOC);
+
+    $pdo = null;
 
 ?>
+
 
 
 

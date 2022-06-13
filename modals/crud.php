@@ -6,7 +6,7 @@ Class Crud{
 
     public $senhadb;
     
-    public $usuariodb;
+    public $clientedb;
     
     public $nomedb;
     

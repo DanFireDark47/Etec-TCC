@@ -56,20 +56,22 @@
 
 
 
-<main>
+<main class="text-center bg-dark text-white p-3 m-2 rounded-3">
     <form method="POST" action="../modals/crudExe.php">
-    <div class="text-center bg-dark text-white p-3 m-2 rounded-3">
-        <div class="float-md-start bg-dark mb-3">
+        <div class="d-inline-block p-3 border mx-md-5 mb-4 border-2 bg-opacity-25 bg-secondary">
             <img src="<?php echo $foto;?>" class=" rounded-circle d-fluid img-fluid border border-4 border-secondary">
             <h1 class=""><?php echo $row['nome']; ?></h1>
         </div>
-        <div class="float-md-end p-md-3 border border-2 bg-opacity-25 bg-secondary">
+        <div class="d-inline-block p-3 mx-md-5 border border-2 bg-opacity-25 bg-secondary">
         <h3>Bairro: <?php echo $row['bairro']; ?></h3>
         <h3>Cidade: <?php echo $row['cidade']; ?></h3>
         <h3>Estado: <?php echo $row['estado']; ?></h3>
         <h3>Endereco: <?php echo $row['endereco']; ?></h3>
         </div>
+        <div class="p-2 mt-5">
+        <h2 class="align-text-bottom">Serviços</h2>  
         <table class="table table-dark table-striped">
+        
             <thead>
                 <tr>
                 <th scope="col">Nome</th>
@@ -80,13 +82,16 @@
             </thead>
             <tbody>
                 <?php 
+                
                     $servico = new Servicos();
                     $servico->ServicoPaginaFornecedor($id);
 
                 ?>
             </tbody>
+            
         </table>
-
+    </div>
+        <h2>Horarios</h2>
         <?php
         $agenda = new AgendaFornecedor();
         $agenda->AgendaPaginaFornecedorConstructor($id);

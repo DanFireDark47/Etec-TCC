@@ -9,7 +9,6 @@
 </head>
 <body class="bg-secondary">
 
-
     <?php 
     include('../modals/header.php');
     $Header->Construct();

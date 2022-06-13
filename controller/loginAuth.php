@@ -19,6 +19,12 @@ class loginAuth{
         
                 }
             }
+        public function PermiteApenasAdmin(){
+            if($_SESSION['tipoConta'] != 'Administrador' || $_SESSION['logado'] != true){
+                header("Location:../view/home.php");
+        
+                }
+            }
     }
 
     $loginAuth = new loginAuth;

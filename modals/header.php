@@ -46,7 +46,7 @@ class Header{
                 <a class="nav-link" href="../view/loginUsuario.php">Fazer Login</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link disabled" href="../view/quemSomosNós.php">Quem somos nós</a>
+            <a class="nav-link disabled" href="../view/quemSomosNós.php">Sobre Nós</a>
             </li>
             </ul>
             <form class="d-flex">
@@ -84,7 +84,7 @@ class Header{
             <a class="nav-link" href="../view/agendaUsuario.php">Agenda</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="../view/quemSomosNós.php">Quem somos nós</a>
+            <a class="nav-link" href="../view/quemSomosNós.php">Sobre Nós</a>
             </li>
             </ul>
         <form class="d-flex">
@@ -149,7 +149,7 @@ class Header{
 
         
             <li class="nav-item">
-            <a class="nav-link" href="../view/quemSomosNós.php">Quem somos nós</a>
+            <a class="nav-link" href="../view/quemSomosNós.php">Sobre Nós</a>
             </li>
             </ul>
             <form class="d-flex">
@@ -187,7 +187,7 @@ class Header{
         <a class="nav-link" href="../view/agendaUsuario.php">Agenda</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link disabled" href="../view/quemSomosNós.php">Quem somos nós</a>
+            <a class="nav-link disabled" href="../view/quemSomosNós.php">Sobre Nós</a>
         </li>
         </ul>
         <form class="d-flex">
@@ -224,7 +224,7 @@ class Header{
         <a class="nav-link disabled" href="../view/agendaUsuario.php">Agenda</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../view/quemSomosNós.php">Quem somos nós</a>
+            <a class="nav-link" href="../view/quemSomosNós.php">Sobre Nós</a>
         </li>
         </ul>
         <form class="d-flex">
