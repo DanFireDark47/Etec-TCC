@@ -17,14 +17,17 @@
     <img class="mb-3 img-fluid" src="<?php echo $LogoComTitulo->getImg() ?>" alt="" width="120" height="100">
     <h1 class="h3 mb-3 fw-normal text-white">Cadastro</h1>
     <?php
-    if(isset($_SESSION['erroCadastroCliente'])){
-      if($_SESSION['erroCadastroCliente'] == true){
+    session_start();
+    if(isset($_SESSION['EmailEmUso'])){
       echo '
       <div class="alert alert-danger">
-      Erro na Realização do Cadastro
+      '.$_SESSION['EmailEmUso'].' já está em uso'.'
       </div>
       ';
-    }}?>
+    }
+    
+    
+    ?>
 
     <div class="container">
 

@@ -88,6 +88,22 @@ class Card{
         return $bairro;
     }
 
+    public function CardUnico($documento){
+        $Crud = new Crud('barbearia', 'root', '');
+        $Crud->SetBancoDeDados();
+        $conexão = $Crud->conectar();
+        $query = $conexão->query("SELECT * FROM card WHERE documentoSalao_card = '$documento'");
+        $result = $query->fetchAll();
+        foreach($result as $row){
+            if($row['foto_path'] == NULL){
+                $Foto = '../imgs/SemFoto.png';
+            }else{
+                $Foto = $row['foto_path'];
+            }
+            $this->Card($row['documentoSalao_card'],$Foto,$row['nome'],$row['descricao'],$row['preco'],$this->getBairro($row['documentoSalao_card']),$row['star'],$row['especializacao']);
+        }
+    }
+
     public function constructCardsPage(){
         $Crud = new Crud('barbearia', 'root', '');
         $Crud->SetBancoDeDados();
@@ -110,11 +126,6 @@ class Card{
             $Especializacao = $row['especializacao'];
             $this->Card($Documento,$Foto,$Nome,$Descricao,$Preco,$Bairro,$Star,$Especializacao);
         }
-        
-
-    }
-
-    public function SelecionaServiços($documentoSalao){
         
 
     }

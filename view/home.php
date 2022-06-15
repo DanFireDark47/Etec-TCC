@@ -23,23 +23,23 @@
 <!--Card-->
 <?php 
     if(isset($_SESSION['logado'])){
-        if($_SESSION['logado'] == true && $_SESSION['tipoConta'] == "Usuario"){
+        if($_SESSION['tipoConta'] == "Usuario"){
             $card->constructCardsPage();
-        }
-    }
-    if(isset($_SESSION['logado'])){
-        if($_SESSION['logado'] && $_SESSION['tipoConta'] == "Fornecedor"){
-        $agenda = new AgendaFornecedor();
-        $agenda->AgendaHomeConstructor();
+        }else if($_SESSION['tipoConta'] == "Fornecedor"){
+            $agenda = new AgendaFornecedor();
+            $agenda->AgendaHomeConstructor();
+        }else if($_SESSION['tipoConta'] == "Administrador"){
+            header("Location: AdminPage.php");
         }
     }else{
         $card->constructCardsPage();
+        include("../modals/footer.php");
     }
 
 
 ?>
 
-<?php include('../modals/footer.php') ?>
+
 
 
 </body>
