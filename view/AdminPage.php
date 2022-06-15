@@ -119,9 +119,10 @@ if(isset($_GET['EditarLocal'])){
     echo '<h2 class="text-center">Editar Local</h2>';
     echo "<table class='table table-dark table-striped table-bordered'>";
     echo "<tr><th>CEP</th><th>Endereco</th><th>Numero</th><th>Complemento</th><th>Bairro</th><th>Cidade</th><th>Estado</th><th>Ação</th></tr>";
-    echo "<form action='AdminPage.php?TipoProcura=Salao&EditarLocal=".$_GET['EditarLocal']."' method='GET'>";
+    
     foreach($saloes as $salao){
         if($salao['documento'] == $_GET['EditarLocal']){
+            echo "<form action='AdminPage.php?TipoProcura=Salao&EditarLocal=".$_GET['EditarLocal']."' method='GET'>";
             echo "<tr>";
             echo "<td><input type='text' value='".$salao['cep']."' name='cep' class='form-control'/></td>";
             echo "<td><input type='text' value='".$salao['endereco']."' name='endereco' class='form-control'/></td>";
@@ -137,6 +138,28 @@ if(isset($_GET['EditarLocal'])){
     echo "</form>";
     echo "</table>";
     echo "</div>";            
+}
+
+if(isset($_GET['SalvarLocal'])){
+    $pdo = $Crud->conectar();
+    $cep = $_GET['cep'];
+    $endereco = $_GET['endereco'];
+    $numero = $_GET['numero'];
+    $complemento = $_GET['complemento'];
+    $bairro = $_GET['bairro'];
+    $cidade = $_GET['cidade'];
+    $estado = $_GET['estado'];
+    $documento = $_GET['SalvarLocal'];
+    $sql = "UPDATE salao SET cep = '$cep', endereco = '$endereco', numero = '$numero', complemento = '$complemento', bairro = '$bairro', cidade = '$cidade', estado = '$estado' WHERE documento = '$documento'";
+    $result = $pdo->query($sql);
+    if($result){
+        echo "<script>alert('Local editado com sucesso!');</script>";
+        echo "<script>window.location.href = 'AdminPage.php?TipoProcura=Salao';</script>";
+    }else{
+        echo "<script>alert('Erro ao editar local!');</script>";
+        echo "<script>window.location.href = 'AdminPage.php?TipoProcura=Salao';</script>";
+    }
+
 }
 
 if(isset($_GET['EdicaoSalao'])){
@@ -317,12 +340,6 @@ if(isset($_GET['DeletarAgendamento'])){
     }
 }
 
-
-
-
 ?>
-
-
-
 </body>
 </html>
