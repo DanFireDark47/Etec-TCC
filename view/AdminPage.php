@@ -74,16 +74,17 @@ if(isset($_GET['TipoProcura'])){
             echo "<div class='bg-dark mx-1 text-white rounded'>";
             echo '<h2 class="text-center">Clientes</h2>';
             echo "<table class='table table-dark table-striped table-bordered'>";
-            echo "<tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Documento</th><th>Ações</th></tr>";
+            echo "<tr><th>Nome</th><th>Email</th><th>Telefone</th>
+            <th>Ações</th></tr>";
             foreach($clientes as $cliente){
                 echo "<tr>";
                 echo "<td>".$cliente['nome']."</td>";
                 echo "<td>".$cliente['email']."</td>";
                 echo "<td>".$cliente['telefone']."</td>";
-                echo "<td>".$cliente['documento']."</td>";
                 echo "<td><a href='AdminPage.php?TipoProcura=Cliente&DeletarCliente=".$cliente['documento']."' class='btn btn-outline-danger'>Deletar</a>
                 <a href='AdminPage.php?TipoProcura=Cliente&Agenda=".$cliente['documento']."' class='btn btn-outline-primary'>Agenda</a>
                 <a href='AdminPage.php?TipoProcura=Cliente&EdicaoCliente=".$cliente['documento']."' class='btn btn-outline-primary'>Editar</a>
+                <a href='AdminPage.php?TipoProcura=Cliente&ResetarCliente=".$cliente['documento']."' class='btn btn-outline-danger'>Resetar Senha</a>
                 </td>";
                 echo "</tr>";
             }
@@ -93,19 +94,19 @@ if(isset($_GET['TipoProcura'])){
             echo "<div class='mx-1 bg-dark text-white rounded'>";
             echo '<h2 class="text-center">Salões</h2>';
             echo "<table class='table table-dark table-striped table-bordered'>";
-            echo "<tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Endereço</th><th>Documento</th><th>Ações</th></tr>";
+            echo "<tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Endereço</th><th>Ações</th></tr>";
             foreach($saloes as $salao){
                 echo "<tr>";
                 echo "<td>".$salao['nome']."</td>";
                 echo "<td>".$salao['email']."</td>";
                 echo "<td>".$salao['telefone']."</td>";
                 echo "<td>".$salao['endereco']."</td>";
-                echo "<td>".$salao['documento']."</td>";
                 echo "<td><a href='AdminPage.php?TipoProcura=Salao&DeletarSalao=".$salao['documento']."' class='btn btn-outline-danger'>Deletar</a>
                 <a href='AdminPage.php?TipoProcura=Salao&Agendamentos=".$salao['documento']."' class='btn btn-outline-primary'>Agendamentos</a>
                 <a href='AdminPage.php?TipoProcura=Salao&Card=".$salao['documento']."' class='btn btn-outline-primary'>Card</a>
                 <a href='AdminPage.php?TipoProcura=Salao&EdicaoSalao=".$salao['documento']."' class='btn btn-outline-primary'>Editar</a>
                 <a href='AdminPage.php?TipoProcura=Salao&EditarLocal=".$salao['documento']."' class='btn btn-outline-primary'>Editar Local</a>
+                <a href='AdminPage.php?TipoProcura=Salao&ResetarSalao=".$salao['documento']."' class='btn btn-outline-danger'>Resetar Senha</a>
                 </td>";
                 echo "</tr>";
             }
@@ -113,6 +114,24 @@ if(isset($_GET['TipoProcura'])){
             echo "</div>";
         }
     }
+
+if(isset($_GET['ResetarCliente'])){
+    $pdo = $Crud->conectar();
+    $sql = "UPDATE cliente SET senha = '123456' WHERE documento = '".$_GET['ResetarCliente']."'";
+    $pdo->exec($sql);
+    echo "<script>alert('Senha resetada com sucesso!');</script>";
+    echo "<script>alert('Sua Senha Temporaria é 123456');</script>";
+    echo "<script>window.location.href = 'AdminPage.php?TipoProcura=Cliente';</script>";
+}
+
+if(isset($_GET['ResetarSalao'])){
+    $pdo = $Crud->conectar();
+    $sql = "UPDATE salao SET senha = '123456' WHERE documento = '".$_GET['ResetarSalao']."'";
+    $pdo->exec($sql);
+    echo "<script>alert('Senha resetada com sucesso!');</script>";
+    echo "<script>alert('Sua Senha Temporaria é 123456');</script>";
+    echo "<script>window.location.href = 'AdminPage.php?TipoProcura=Salao';</script>";
+}
 
 if(isset($_GET['EditarLocal'])){
     echo "<div class='bg-dark mx-1 text-white rounded'>";
@@ -166,7 +185,7 @@ if(isset($_GET['EdicaoSalao'])){
     echo "<div class='bg-dark mx-1 text-white rounded'>";
     echo '<h2 class="text-center">Edição de Salão</h2>';
     echo "<table class='table table-dark table-striped table-bordered'>";
-    echo "<tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Documento</th><th>Ações</th></tr>";
+    echo "<tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Ações</th></tr>";
     foreach($saloes as $salao){
         if($salao['documento'] == $_GET['EdicaoSalao']){
             echo "<form action='AdminPage.php?TipoProcura=Salao'>";
@@ -175,7 +194,6 @@ if(isset($_GET['EdicaoSalao'])){
             echo "<td><input class='form-control' type='text' name='nome' value='".$salao['nome']."'/></td>";
             echo "<td><input class='form-control' type='text' name='email' value='".$salao['email']."'/></td>";
             echo "<td><input class='form-control' type='text' name='telefone' value='".$salao['telefone']."'/></td>";
-            echo "<td><input class='form-control' type='text' name='documento' value='".$salao['documento']."'/></td>";
             echo "<td><button type='submit' name='SalvarSalao' value='".$salao['documento']."'class='btn btn-outline-danger'>Salvar</a>";
             echo "</tr>";
         }
@@ -203,7 +221,7 @@ if(isset($_GET['EdicaoCliente'])){
     echo "<div class='bg-dark mx-1 text-white rounded'>";
     echo '<h2 class="text-center">Edição de Cliente</h2>';
     echo "<table class='table table-dark table-striped table-bordered'>";
-    echo "<tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Documento</th><th>Ações</th></tr>";
+    echo "<tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Ações</th></tr>";
     foreach($clientes as $cliente){
         if($cliente['documento'] == $_GET['EdicaoCliente']){
             echo "<form action='AdminPage.php?TipoProcura=Cliente'>";
@@ -211,7 +229,6 @@ if(isset($_GET['EdicaoCliente'])){
             echo "<td><input class='form-control' type='text' name='nome' value='".$cliente['nome']."'/></td>";
             echo "<td><input class='form-control' type='text' name='email' value='".$cliente['email']."'/></td>";
             echo "<td><input class='form-control' type='text' name='telefone' value='".$cliente['telefone']."'/></td>";
-            echo "<td><input class='form-control' type='text' name='documento' value='".$cliente['documento']."'/></td>";
             echo "<td><button type='submit' name='Salvar' value='".$cliente['documento']."'class='btn btn-outline-danger'>Salvar</a>";
             echo "</tr>";
         }
@@ -226,11 +243,10 @@ if(isset($_GET['Salvar'])){
     $nome = $_GET['nome'];
     $email = $_GET['email'];
     $telefone = $_GET['telefone'];
-    $documento =  $_GET['documento'];
-    $Salvar = $_GET['Salvar'];
+    $documento = $_GET['Salvar'];
     $Crud->SetBancoDeDados();
     $conexão = $Crud->conectar();
-    $query = $conexão->prepare("UPDATE cliente SET nome = '$nome', email = '$email', telefone = '$telefone', documento = '$documento' WHERE documento = '$Salvar'");
+    $query = $conexão->prepare("UPDATE cliente SET nome = '$nome', email = '$email', telefone = '$telefone' WHERE documento = '$documento'");
     $query->execute();
     header("Location: AdminPage.php?TipoProcura=Cliente");
     
@@ -304,7 +320,7 @@ if(isset($_GET['Agendamentos'])){
     echo "<div class='bg-dark mx-1 text-white rounded'>";
     echo '<h2 class="text-center">Agendamentos</h2>';
     echo "<table class='table table-dark table-striped table-bordered'>";
-    echo "<tr><th>data</th><th>horario</th><th>Documento Cliente</th><th>Documento Salao</th><th>Ações</th></tr>";
+    echo "<tr><th>data</th><th>horario</th><th>Nome do Cliente</th><th>Ações</th></tr>";
     foreach($saloes as $salao){
         if($salao['documento'] == $_GET['Agendamentos']){
             $pdo = $Crud->conectar();
@@ -313,13 +329,22 @@ if(isset($_GET['Agendamentos'])){
             $agendamentos = $result->fetchAll(PDO::FETCH_ASSOC);
             foreach($agendamentos as $agendamento){
                 $DataFormatada = $DataFormatar->DataFormatar($agendamento['data']);
+                
 
                 echo "<tr>";
                 
                 echo "<td>".$DataFormatada."</td>";
                 echo "<td>".$agendamento['horario']."</td>";
-                echo "<td>".$agendamento['documentoCliente_agenda']."</td>";
-                echo "<td>".$agendamento['documentoSalao_agenda']."</td>";
+                //verifica se o cliente existe se existir ele mostra o nome do cliente se não ele mostra "Não Cadastrado"
+                $pdo = $Crud->conectar();
+                $sql = "SELECT * FROM cliente WHERE documento = '".$agendamento['documentoCliente_agenda']."'";
+                $result = $pdo->query($sql);
+                $cliente = $result->fetchAll(PDO::FETCH_ASSOC);
+                if(count($cliente) > 0){
+                    echo "<td>".$cliente[0]['nome']."</td>";
+                }else{
+                    echo "<td>Não Cadastrado</td>";
+                }
                 echo "<td><a href='AdminPage.php?TipoProcura=Salao&Agendamentos=".$Agendamento."&DeletarAgendamento=".$agendamento['id']."' class='btn btn-outline-danger'>Deletar</a></td>";
                 echo "</tr>";
             }

@@ -24,7 +24,20 @@
 <?php 
     if(isset($_SESSION['logado'])){
         if($_SESSION['tipoConta'] == "Usuario"){
-            $card->constructCardsPage();
+            if(isset($_SESSION['senha'])){
+                echo '<div class="mt-5 p-2 rounded container bg-dark text-white">';
+                echo '<form action="../modals/crudExe.php" method="post">';
+                echo '<h3 class="text-center">Digite a sua nova senha</h3>';
+                echo '<input type="text" class="text-center form-control mb-3" placeholder="Nova Senha" name="senha" value="">';
+                echo '<div class="d-grid gap-2 col-6 mx-auto">';
+                echo '<button class="btn btn-outline-success" type="submit" name="exe" value="trocarSenha">Trocar Senha</button>';
+                echo '</div>';
+                echo '</form>';
+                echo '</div>';
+            }else{
+                $card->constructCardsPage();
+            }
+            
         }else if($_SESSION['tipoConta'] == "Fornecedor"){
             $agenda = new AgendaFornecedor();
             $agenda->AgendaHomeConstructor();

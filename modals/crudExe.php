@@ -46,5 +46,7 @@ if(isset($_POST['exe']) && $_POST['exe'] == 'loginCliente'){
     $Crud->deslogar();
     header('Location: ../view/home.php');
 
+}else if($_POST['exe'] == "trocarSenha"){
+    $Crud->trocarSenha();
 }
 ?>

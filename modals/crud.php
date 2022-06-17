@@ -66,14 +66,23 @@ Class Crud{
         $row = $query->fetch(PDO::FETCH_ASSOC);
 
         if($row['email'] == $email && $row['senha'] == $senha){
-                    
-                    session_start();
+            if($row['senha'] != 123456){
+                session_start();
                     $_SESSION['logado'] = true;
                     $_SESSION['nome'] = $row['nome'];
                     $_SESSION['tipoConta'] = 'Usuario';
                     $_SESSION['documento'] = $row['documento'];
                     
                     header('Location: ../view/home.php');  // Redirecionando para Home
+            }else if($row['senha'] == 123456){
+                session_start();
+                $_SESSION['logado'] = true;
+                $_SESSION['nome'] = $row['nome'];
+                $_SESSION['tipoConta'] = 'Usuario';
+                $_SESSION['documento'] = $row['documento'];
+                $_SESSION['senha'] = $row['senha'];
+                header('Location: ../view/home.php');  // Redirecionando para Home
+            }
 
         }else if($row['email'] != $email || $row['senha'] != $senha){
 
@@ -123,6 +132,12 @@ Class Crud{
     }
 
     public function fecharConta($documento){
+        //deleta todos os agendamentos do cliente
+        $conexão1 = $this->conectar();
+        $query1 = $conexão1->prepare("DELETE FROM agenda WHERE documentoCliente_agenda =:documento");
+        $query1->bindParam(":documento",$documento,PDO::PARAM_INT);
+        $query1->execute();
+        
         $this->SetBancoDeDados();
         $conexão = $this->conectar();
         $query = $conexão->prepare("DELETE FROM cliente WHERE documento =:documento");
@@ -261,7 +276,7 @@ Class Crud{
             $_SESSION['tipoConta'] = 'Administrador';
             $_SESSION['id'] = $row['id'];
             
-            header('Location: ../view/adminPage.php');  // Redirecionando para Home
+            header('Location: ../view/AdminPage.php');  // Redirecionando para Home
         }else{
             session_start();
             $_SESSION['tentativaADM'] = true;
@@ -431,6 +446,21 @@ Class Crud{
         $query->execute();
         header('Location: ../view/cadastrarProduto.php');
     }
+    public function trocarSenha(){
+        session_start();
+        $senha = $_POST['senha'];
+        $documento = $_SESSION['documento'];
+        $_SESSION['senha'] = null;
+
+        $this->SetBancoDeDados();
+        $conexão = $this->conectar();
+        $query = $conexão->prepare("UPDATE cliente SET senha =:senha WHERE documento =:documento");
+        $query->bindParam(":senha",$senha,PDO::PARAM_STR);
+        $query->bindParam(":documento",$documento,PDO::PARAM_STR);
+        $query->execute();
+        header('Location: ../view/home.php');
+    }
+
 
 }
 $Crud = new Crud('barbearia', 'root', '');
